@@ -158,7 +158,6 @@ tautologies = [
     ("(a -> (a -> b)) -> (a -> b)",   lambda a,b: IMP(IMP(a, IMP(a,b)), IMP(a,b))),
     ("NOT(NOT(a)) -> a",              lambda a,b: IMP(NOT(NOT(a)), a)),
     ("a -> NOT(NOT(a))",              lambda a,b: IMP(a, NOT(NOT(a)))),
-    ("(a->b) -> (NOT(b)->NOT(a))",    lambda a,b: IMP(IMP(a,b), IMP(NOT(b), NOT(a)))),
     ("OR(a->b, b->a)  [prelinearity]",lambda a,b: OR(IMP(a,b), IMP(b,a))),
 ]
 
@@ -166,6 +165,7 @@ non_tautologies = [
     ("a -> b",                        lambda a,b: IMP(a, b)),
     ("OR(a, NOT(a))  [excl. middle]", lambda a,b: OR(a, NOT(a))),
     ("NOT(AND(a, NOT(a))) [non-contr]",lambda a,b: NOT(AND(a, NOT(a)))),
+    ("(a->b)->(NOT(b)->NOT(a)) [cpos]",lambda a,b: IMP(IMP(a,b), IMP(NOT(b), NOT(a)))),
 ]
 
 print("  TAUTOLOGIES (should all be True):")

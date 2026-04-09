@@ -55,8 +55,8 @@
 We define a formal logic over the four-dimensional space
 $V=[0,1]\times[-1,1]^3$, where the real component encodes truth
 and the imaginary components encode epistemic character. Logical
-connectives (AND, OR, NOT, implication) are defined as a bounded
-residuated lattice. An $\SU$ group acts on truth values by quaternionic
+connectives (AND, OR, implication) form a bounded residuated
+lattice, equipped with an involutive negation (NOT). An $\SU$ group acts on truth values by quaternionic
 conjugation, defining context transformations that preserve truth
 while rotating epistemic character.
 
@@ -116,6 +116,9 @@ and selection ($\recu{k}$).
   group-invariant sublattice (Section~\ref{sec:glattice}).
 \item A soundness proof for inference rules across all contexts
   (Section~\ref{sec:soundness}).
+\item A completeness theorem reducing G-lattice tautologies to
+  $G^\sim$ (G\"odel logic with involutive negation) via a
+  real-part independence lemma (Section~\ref{sec:completeness}).
 \item A formal argument that the imaginary dimensions are
   operationally distinguishable, not decoration
   (Section~\ref{sec:decoration}).
@@ -292,8 +295,10 @@ transformation of a truth value $a$ is the conjugation action:
 \label{def:glattice}
 The \emph{quaternionic G-lattice} is the triple $(L,G,\cdot)$ where:
 \begin{itemize}[nosep]
-\item $L=(V,\mathrm{AND},\mathrm{OR},\mathrm{NOT},\to)$ is the
-  residuated lattice from Proposition~\ref{prop:lattice},
+\item $L=(V,\mathrm{AND},\mathrm{OR},\to,\mathbf{0},\mathbf{1})$ is the
+  residuated lattice from Proposition~\ref{prop:lattice}, equipped
+  with the involutive negation $\mathrm{NOT}$ from
+  Remark~\ref{rem:negation},
 \item $G=\SU$ is the group of unit quaternions,
 \item $\cdot$ is the conjugation action from Definition~\ref{def:context}.
 \end{itemize}
@@ -331,7 +336,7 @@ affect tautologies or derivability.
 
 \begin{theorem}[Commutation theorem]
 \label{thm:commutation}
-Let $f:V^n\to V$ be any lattice connective (AND, OR, NOT, or a
+Let $f:V^n\to V$ be any connective (AND, OR, NOT, $\to$, or a
 composition thereof). Then
 \[
   q\cdot f(a_1,\ldots,a_n)=f(q\cdot a_1,\ldots,q\cdot a_n)
@@ -418,11 +423,11 @@ to the truth predicate of Definition~\ref{def:true}.
 \end{theorem}
 
 \begin{proof}
-\textbf{R1} (Modus ponens): By the residuation property of the
-G\"odel lattice. If $\Real(a)\geq\tau$ and $\Real(a\to b)\geq\tau$,
-then $a_r\leq b_r$ (otherwise $a\to b$ would have real part $b_r<\tau$,
-contradicting the premise). Hence $\Real(b)=b_r\geq a_r\geq\tau$.
-This is the standard soundness argument for residuated lattices
+\textbf{R1} (Modus ponens): If $\Real(a)\geq\tau$ and
+$\Real(a\to b)\geq\tau$, then either $a_r\leq b_r$ (in which case
+$b_r\geq a_r\geq\tau$) or $a_r>b_r$ (in which case
+$\Real(a\to b)=b_r\geq\tau$). In both cases $\Real(b)\geq\tau$.
+This is the standard soundness argument for the G\"odel residuum
 \citep{hajek1998,galatos2007}.
 
 \textbf{R2} (Context shift): By Proposition~\ref{prop:action}(1),
@@ -663,8 +668,8 @@ Decision distinguishability & 50\,000 & --- & 49.6\% changed \\
 Panorama ($\Imag\to 0$) & 10\,000 & --- & $\|\Imag\|<0.005$ \\
 $\Real$-independence (all connectives) & 100\,000 & 0 & $0$ \\
 $\Real$-independence (7 compounds) & 100\,000 & 0 & $0$ \\
-G\"odel tautologies (7 formulas) & 100\,000 & 0 & confirmed \\
-Non-tautologies (3 formulas) & 100\,000 & 0 & confirmed \\
+$G^\sim$ tautologies (6 formulas) & 100\,000 & 0 & confirmed \\
+Non-tautologies (4 formulas) & 100\,000 & 0 & confirmed \\
 \bottomrule
 \end{tabularx}
 \end{table}
