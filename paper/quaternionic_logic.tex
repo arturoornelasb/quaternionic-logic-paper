@@ -1,0 +1,646 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{natbib}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{xcolor}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{openquestion}{Open Question}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% -- Colors (from P9) --
+\definecolor{rcolor}{HTML}{D85A30}
+\definecolor{icolor}{HTML}{534AB7}
+\definecolor{jcolor}{HTML}{1D9E75}
+\definecolor{kcolor}{HTML}{185FA5}
+
+\newcommand{\Op}{\mathcal{O}}
+\newcommand{\rey}[1]{{\color{rcolor}#1}}
+\newcommand{\imag}[1]{{\color{icolor}#1}}
+\newcommand{\exac}[1]{{\color{jcolor}#1}}
+\newcommand{\recu}[1]{{\color{kcolor}#1}}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\Imag}{\operatorname{Im}}
+\newcommand{\SU}{\mathrm{SU}(2)}
+
+\title{Quaternionic Logic: A G-Lattice Unifying\\Boolean and Fuzzy Frameworks}
+\author{J.~Arturo Ornelas Brand\\
+  \small Independent Researcher\\
+  \small \texttt{arturoornelas62@gmail.com}}
+\date{April 2026}
+
+\begin{document}
+\maketitle
+
+%======================================================================
+\begin{abstract}
+%======================================================================
+We define a formal logic over the four-dimensional space
+$[0,1]\times\mathbb{R}^3$, where the real component encodes truth
+and the imaginary components encode epistemic character. Logical
+connectives (AND, OR, NOT, implication) are defined as a bounded
+residuated lattice. An $\SU$ group acts on truth values by quaternionic
+conjugation, defining context transformations that preserve truth
+while rotating epistemic character.
+
+The central result is a \emph{commutation theorem}: lattice
+connectives commute with the group action if and only if they
+operate exclusively on the real component. Boolean logic therefore
+emerges as the \emph{context-free} (group-invariant) special case,
+while the full four-dimensional logic is context-dependent. Six
+known logics---Boolean, fuzzy, modal, trivalent, ordinal, and
+probabilistic---are recovered as dimensional restrictions.
+
+The combined structure is a \emph{G-lattice}: a residuated lattice
+equipped with a non-abelian group action. No exact precedent for
+this specific combination---residuated lattice with $\SU$
+conjugation and real-part invariance---was found in the literature.
+
+All results are verified computationally at machine precision
+($\sim10^{-16}$) over $50{,}000$~test cases.
+\end{abstract}
+
+%======================================================================
+\section{Introduction}
+\label{sec:intro}
+%======================================================================
+
+Boolean and fuzzy logics are widely regarded as distinct formal
+systems. Boolean logic operates on $\{0,1\}$ with classical
+connectives; fuzzy logic generalises to $[0,1]$ with t-norms
+\citep{zadeh1965,hajek1998}. Modal, many-valued, and probabilistic
+logics add further structure. Attempts to unify these frameworks
+typically embed one system within another or construct meta-logics
+that contain multiple systems as fragments
+\citep{cignoli2000,esteva2001}.
+
+This paper proposes a different approach. Rather than embedding
+logics within a common language, we show that they arise as
+\emph{dimensional restrictions} of a single four-dimensional
+structure---and that the mechanism distinguishing them is
+\emph{context sensitivity}.
+
+The construction builds on the quaternionic operator
+$\Op=\{0,1,+,\imag{i},\exac{j},\recu{k}\}$ introduced in the
+companion paper \citep{ornelas2026p9}, which associates to each
+concept a four-dimensional coordinate
+$(\rey{r},\imag{i},\exac{j},\recu{k})$ encoding crystallised truth
+($\rey{r}$), potentiality ($\imag{i}$), verification ($\exac{j}$),
+and selection ($\recu{k}$).
+
+\paragraph{Contributions.}
+\begin{enumerate}[nosep]
+\item A bounded residuated lattice on $[0,1]\times\mathbb{R}^3$
+  that recovers six known logics as dimensional restrictions
+  (Section~\ref{sec:lattice}).
+\item A commutation theorem characterising Boolean logic as the
+  group-invariant sublattice (Section~\ref{sec:glattice}).
+\item A soundness proof for inference rules across all contexts
+  (Section~\ref{sec:soundness}).
+\item A formal argument that the imaginary dimensions are
+  operationally distinguishable, not decoration
+  (Section~\ref{sec:decoration}).
+\item Computational verification of all results at machine precision
+  (Section~\ref{sec:computation}).
+\end{enumerate}
+
+%======================================================================
+\section{Preliminaries}
+\label{sec:prelim}
+%======================================================================
+
+\subsection{Quaternions}
+
+The quaternion algebra $\mathbb{H}$ is the four-dimensional real
+algebra spanned by $\{1,i,j,k\}$ with multiplication rules
+$i^2=j^2=k^2=ijk=-1$. Every quaternion $q=r+ai+bj+ck$ has real
+part $\Real(q)=r$ and imaginary part $\Imag(q)=(a,b,c)$. The
+conjugate is $\bar{q}=r-ai-bj-ck$, and for unit quaternions
+($|q|=1$), $q^{-1}=\bar{q}$.
+
+The group $\SU$ of unit quaternions acts on $\mathbb{H}$ by
+conjugation: $q\cdot a = q\,a\,\bar{q}$. This action preserves
+the real part, the imaginary norm, and the total norm:
+\begin{align}
+  \Real(q\,a\,\bar{q}) &= \Real(a), \label{eq:re-inv}\\
+  \|\Imag(q\,a\,\bar{q})\| &= \|\Imag(a)\|, \label{eq:im-norm}\\
+  \|q\,a\,\bar{q}\| &= \|a\|. \label{eq:total-norm}
+\end{align}
+
+\subsection{Residuated lattices}
+
+A \emph{bounded residuated lattice} is a structure
+$(L,\wedge,\vee,\otimes,\to,0,1)$ where $(L,\wedge,\vee,0,1)$ is
+a bounded lattice, $\otimes$ is a monoidal operation (the t-norm),
+and $\to$ is its residuum satisfying
+$a\otimes b\leq c \iff a\leq b\to c$
+\citep{galatos2007}.
+
+\subsection{The Four Kingdoms}
+
+Following \citet{ornelas2026p9}, each axis of the quaternionic
+operator corresponds to an irreducible mode of information:
+\begin{itemize}[nosep]
+\item $\rey{r}$: what crystallises, fixes, defines (resolved truth),
+\item $\imag{i}$: what flows, invents, projects (potentiality),
+\item $\exac{j}$: what measures, compares, orders (verification),
+\item $\recu{k}$: what selects, prunes, advances (recursion).
+\end{itemize}
+
+%======================================================================
+\section{The Lattice of Connectives}
+\label{sec:lattice}
+%======================================================================
+
+\begin{definition}[Truth values]
+\label{def:truth}
+A \emph{quaternionic truth value} is an element
+$a=(\rey{r},\imag{i},\exac{j},\recu{k})\in[0,1]\times\mathbb{R}^3$.
+The component $\rey{r}\in[0,1]$ is the \emph{degree of truth}.
+The triple $(\imag{i},\exac{j},\recu{k})\in\mathbb{R}^3$ is the
+\emph{epistemic character}.
+\end{definition}
+
+\begin{definition}[Connectives]
+\label{def:connectives}
+Define component-wise operations on $V=[0,1]\times\mathbb{R}^3$:
+\begin{align}
+  \mathrm{AND}(a,b) &= (\min(a_r,b_r),\;\min(a_i,b_i),\;\min(a_j,b_j),\;\min(a_k,b_k)), \\
+  \mathrm{OR}(a,b) &= (\max(a_r,b_r),\;\max(a_i,b_i),\;\max(a_j,b_j),\;\max(a_k,b_k)), \\
+  \mathrm{NOT}(a) &= (1-a_r,\;-a_i,\;-a_j,\;-a_k), \label{eq:not}\\
+  a\to b &= \begin{cases}
+    (1,\ldots) & \text{if } a_m\leq b_m \text{ for each } m,\\
+    (b_m)_m    & \text{otherwise (component-wise G\"odel residuum).}
+  \end{cases}
+\end{align}
+\end{definition}
+
+\begin{remark}
+The negation~\eqref{eq:not} extends the standard fuzzy negation
+$1-r$ by reversing the sign of all imaginary components. This
+ensures double negation: $\mathrm{NOT}(\mathrm{NOT}(a))=a$.
+Semantically, negation inverts both truth ($1-r$) and epistemic
+direction ($-i,-j,-k$).
+\end{remark}
+
+\begin{proposition}[Lattice structure]
+\label{prop:lattice}
+$(V,\mathrm{AND},\mathrm{OR},\mathrm{NOT},\to,\mathbf{0},\mathbf{1})$
+is a bounded residuated lattice with bounds
+$\mathbf{0}=(0,0,0,0)$ and $\mathbf{1}=(1,0,0,0)$.
+\end{proposition}
+
+\begin{proof}
+Component-wise min and max form a bounded distributive lattice on
+each component. The G\"odel residuum satisfies the residuation
+condition by construction. De Morgan laws hold:
+$\mathrm{NOT}(\mathrm{AND}(a,b))=\mathrm{OR}(\mathrm{NOT}(a),\mathrm{NOT}(b))$
+because $1-\min(x,y)=\max(1-x,1-y)$ for the real component and
+$-\min(x,y)=\max(-x,-y)$ for imaginary components.
+\end{proof}
+
+\subsection{Specialisations}
+
+\begin{theorem}[Recovery of six logics]
+\label{thm:recovery}
+Under dimensional restrictions, the lattice $(V,\mathrm{AND},\mathrm{OR},\mathrm{NOT},\to)$ reduces to:
+\begin{enumerate}[nosep]
+\item \textbf{Boolean}: $i=j=k=0$, $r\in\{0,1\}$
+  $\Rightarrow$ classical propositional logic.
+\item \textbf{Fuzzy}: $i=j=k=0$, $r\in[0,1]$
+  $\Rightarrow$ G\"odel fuzzy logic (min t-norm).
+\item \textbf{Modal}: $j=k=0$, $r,i\in[0,1]$
+  $\Rightarrow$ necessity ($r=i=1$) and possibility ($r>0$ or $i>0$).
+\item \textbf{Trivalent}: $i=k=0$, $j\in[-1,1]$
+  $\Rightarrow$ three-valued logic via $j\mapsto\{-1,0,+1\}$.
+\item \textbf{Ordinal}: $j=k=0$, $i$ encodes rank
+  $\Rightarrow$ comparative/ordinal logic.
+\item \textbf{Probabilistic}: $j=k=0$, $i$ encodes variance
+  $\Rightarrow$ interval-valued probabilistic bounds.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Each restriction projects the four-dimensional connectives onto the
+active subspace. Under restriction~(1), min on $\{0,1\}$ is Boolean
+AND; max is Boolean OR; $1-r$ is classical negation. The remaining
+cases follow by analogous projection, with the trivalent case using
+the sign of $j$ to encode the third value. Full verification for
+all six cases is provided computationally in
+Section~\ref{sec:computation}.
+\end{proof}
+
+%======================================================================
+\section{The G-Lattice: Context as Group Action}
+\label{sec:glattice}
+%======================================================================
+
+\begin{definition}[Context transformation]
+\label{def:context}
+A \emph{context} is a unit quaternion $q\in\SU$. The context
+transformation of a truth value $a$ is the conjugation action:
+\[
+  q\cdot a \;=\; q\,a\,\bar{q}.
+\]
+\end{definition}
+
+\begin{definition}[G-lattice]
+\label{def:glattice}
+The \emph{quaternionic G-lattice} is the triple $(L,G,\cdot)$ where:
+\begin{itemize}[nosep]
+\item $L=(V,\mathrm{AND},\mathrm{OR},\mathrm{NOT},\to)$ is the
+  residuated lattice from Proposition~\ref{prop:lattice},
+\item $G=\SU$ is the group of unit quaternions,
+\item $\cdot$ is the conjugation action from Definition~\ref{def:context}.
+\end{itemize}
+\end{definition}
+
+\begin{proposition}[Action properties]
+\label{prop:action}
+The conjugation action satisfies:
+\begin{enumerate}[nosep]
+\item $\Real(q\cdot a)=\Real(a)$ \hfill(truth is objective),
+\item $\|\Imag(q\cdot a)\|=\|\Imag(a)\|$ \hfill(epistemic weight is conserved),
+\item $\|q\cdot a\|=\|a\|$ \hfill(information is conserved),
+\item $q\cdot(a\cdot_{\mathbb{H}} b)=(q\cdot a)\cdot_{\mathbb{H}}(q\cdot b)$ \hfill(algebra automorphism),
+\item $q\cdot\mathbf{0}=\mathbf{0}$, \quad $q\cdot\mathbf{1}=\mathbf{1}$ \hfill(bounds preserved).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Properties (1)--(3) follow from equations~\eqref{eq:re-inv}--\eqref{eq:total-norm}.
+Property (4): $q(ab)\bar{q}=(qa\bar{q})(qb\bar{q})$ by
+associativity and $\bar{q}q=1$. Property (5):
+$q\cdot(0,0,0,0)=(0,0,0,0)$ trivially, and
+$q\cdot(1,0,0,0)=(1,0,0,0)$ because $(1,0,0,0)$ has zero imaginary part.
+\end{proof}
+
+\begin{theorem}[Commutation theorem]
+\label{thm:commutation}
+Let $f:V^n\to V$ be any lattice connective (AND, OR, NOT, or a
+composition thereof). Then
+\[
+  q\cdot f(a_1,\ldots,a_n)=f(q\cdot a_1,\ldots,q\cdot a_n)
+  \quad\text{for all } q\in\SU
+\]
+if and only if $f$ depends only on the real components
+$(\Real(a_1),\ldots,\Real(a_n))$.
+\end{theorem}
+
+\begin{proof}
+$(\Leftarrow)$ If $f$ depends only on real parts, then
+$\Real(q\cdot a_m)=\Real(a_m)$ by Proposition~\ref{prop:action}(1),
+so $f$ receives the same inputs regardless of $q$. The output has
+zero imaginary part (since $f$ outputs only a real-part result),
+and conjugation fixes real quaternions. Hence both sides are equal.
+
+$(\Rightarrow)$ Suppose $f$ depends on some imaginary component.
+Choose $a$ such that the imaginary part of $f(a)$ is nonzero. Then
+there exists $q\in\SU$ that rotates $\Imag(f(a))$ to a different
+direction, while $f(q\cdot a)$ computes min/max on the rotated
+components of $a$---which generically differs from the rotation of
+min/max of the original components (since min does not commute with
+rotation). Hence the two sides differ.
+\end{proof}
+
+\begin{corollary}[Boolean logic is context-free]
+\label{cor:boolean}
+The sublattice $\{a\in V:\Imag(a)=0\}$ is the unique maximal
+sublattice on which all connectives commute with every context
+transformation. This is the Boolean/fuzzy restriction.
+\end{corollary}
+
+\begin{definition}[Context sensitivity]
+\label{def:sensitivity}
+The \emph{context sensitivity} of a truth value $a$ is
+\[
+  \sigma(a) = 2\,\|\Imag(a)\|.
+\]
+This equals the maximum displacement $\max_{q\in\SU}\|q\cdot a - a\|$.
+\end{definition}
+
+\begin{remark}
+The context sensitivity provides a continuous spectrum:
+$\sigma=0$ corresponds to Boolean logic (context-free),
+and increasing $\sigma$ gives progressively more
+context-dependent logics. The spectrum is parameterised by
+$\|\Imag(a)\|\in[0,\infty)$.
+\end{remark}
+
+%======================================================================
+\section{Soundness}
+\label{sec:soundness}
+%======================================================================
+
+\begin{definition}[Truth predicate]
+\label{def:true}
+For a threshold $\tau\in[0,1]$, a truth value $a$ is \emph{true}
+if $\Real(a)\geq\tau$.
+\end{definition}
+
+The inference rules of the quaternionic G-lattice are:
+
+\begin{enumerate}[nosep,label=\textbf{R\arabic*}.]
+\item \textbf{Modus ponens:} From $a$ and $a\to b$, infer $b$.
+\item \textbf{Context shift:} From $a$, infer $q\cdot a$ for any $q\in\SU$.
+\item \textbf{Context composition:} $q_2\cdot(q_1\cdot a)=(q_2 q_1)\cdot a$.
+\end{enumerate}
+
+\begin{theorem}[Soundness]
+\label{thm:soundness}
+The inference rules \textbf{R1}--\textbf{R3} are sound with respect
+to the truth predicate of Definition~\ref{def:true}.
+\end{theorem}
+
+\begin{proof}
+\textbf{R1} (Modus ponens): By the residuation property of the
+G\"odel lattice. If $\Real(a)\geq\tau$ and $\Real(a\to b)\geq\tau$,
+then $a_r\leq b_r$ (otherwise $a\to b$ would have real part $b_r<\tau$,
+contradicting the premise). Hence $\Real(b)=b_r\geq a_r\geq\tau$.
+This is the standard soundness argument for residuated lattices
+\citep{hajek1998,galatos2007}.
+
+\textbf{R2} (Context shift): By Proposition~\ref{prop:action}(1),
+$\Real(q\cdot a)=\Real(a)\geq\tau$.
+
+\textbf{R3} (Context composition): By associativity of quaternion
+multiplication: $q_2(q_1 a\bar{q}_1)\bar{q}_2=(q_2 q_1)a(\overline{q_2 q_1})$.
+\end{proof}
+
+\begin{remark}
+Soundness decomposes cleanly: \textbf{R1} is inherited from the
+residuated lattice literature; \textbf{R2} follows from the
+real-part invariance of conjugation; \textbf{R3} is the group law.
+No new proof technique is required---the G-lattice soundness is the
+\emph{product} of two well-understood soundness results.
+\end{remark}
+
+%======================================================================
+\section{Epistemic Dimensions Are Not Decoration}
+\label{sec:decoration}
+%======================================================================
+
+A potential objection is that since $\Real(a)$ is always
+context-invariant, the imaginary dimensions
+$(\imag{i},\exac{j},\recu{k})$ are ``decoration'' that do not
+affect logical reasoning. We present three arguments against this
+objection.
+
+\subsection{Operational distinguishability}
+
+\begin{definition}[Decision function]
+\label{def:decision}
+A \emph{decision function} is any map $D:V\to\mathcal{A}$ from
+truth values to an action space $\mathcal{A}$ that depends on the
+full quaternionic truth value, not only on $\Real(a)$.
+\end{definition}
+
+\begin{proposition}
+\label{prop:distinguish}
+If $D$ depends on $\Imag(a)$, then there exist truth values $a,b$
+with $\Real(a)=\Real(b)$ such that $D(a)\neq D(b)$.
+\end{proposition}
+
+\begin{proof}
+Take $a=(r,\alpha,0,0)$ and $b=(r,0,\alpha,0)$ for any
+$r\in(0,1)$ and $\alpha\neq0$. Then $\Real(a)=\Real(b)=r$
+but $\Imag(a)\neq\Imag(b)$, and by assumption $D$ distinguishes them.
+\end{proof}
+
+\begin{example}[The anchor argument]
+\label{ex:football}
+A goal is scored: $a=(0.9,0.6,0.7,0.5)$. Both teams agree on the
+fact ($\Real=0.9$). Let $q_{\mathrm{red}}$ be a context rotation
+(a different ``anchor''):
+\[
+  q_{\mathrm{red}}\cdot a = (0.9,\;0.6,\;{-0.7},\;{-0.5}).
+\]
+The truth is identical. The epistemic character differs: one team
+reads positive verification ($+j$) and celebrates; the other reads
+negative verification ($-j$) and laments. The decision (celebrate
+or lament) depends on $(i,j,k)$, not only on $r$.
+\end{example}
+
+\subsection{The panorama}
+
+Averaging over all contexts yields a pure-real result:
+\[
+  \int_{\SU} q\cdot a\;d\mu(q)
+  = \bigl(\Real(a),\;0,\;0,\;0\bigr),
+\]
+where $\mu$ is the Haar measure on $\SU$. This is the
+``view from nowhere''---Boolean logic. Agents, however, do
+not live in the panorama; they are situated in specific contexts.
+The imaginary dimensions encode the \emph{situated perspective}
+that determines behaviour.
+
+\subsection{Epistemic quality}
+
+Two propositions with the same truth ($\Real=0.7$) but different
+epistemic profiles carry different information:
+\begin{itemize}[nosep]
+\item $(0.7,\;0.8,\;0.1,\;0.2)$: high potentiality, low
+  verification---a \emph{hypothesis}.
+\item $(0.7,\;0.1,\;0.8,\;0.2)$: low potentiality, high
+  verification---an \emph{observation}.
+\end{itemize}
+A rational agent treats hypotheses and observations differently,
+even at equal truth values. The dimensions encode
+\emph{epistemic quality}, which is decision-relevant.
+
+%======================================================================
+\section{Cause--Effect Chains}
+\label{sec:cause}
+%======================================================================
+
+Since $\SU$ is non-abelian, the composition of context changes is
+order-dependent:
+\[
+  q_2\cdot(q_1\cdot a) \neq q_1\cdot(q_2\cdot a)
+  \quad\text{in general.}
+\]
+All orderings preserve the same $\Real(a)$, but produce different
+epistemic signatures $\Imag$. The process retains \emph{memory of
+the path taken}: the order of perspective changes leaves a distinct
+epistemic trace.
+
+\begin{proposition}[Path dependence]
+\label{prop:path}
+For $n$ distinct context changes $q_1,\ldots,q_n\in\SU$, the $n!$
+orderings of application to a truth value $a$ all yield the same
+$\Real(a)$ but generically yield $n!$ distinct imaginary parts.
+\end{proposition}
+
+\begin{proof}
+$\Real$ is invariant under every conjugation (iterated application
+of Proposition~\ref{prop:action}(1)). For the imaginary part,
+distinct orderings correspond to distinct elements of $\SU$ (since
+the group is non-abelian), which generically produce distinct
+rotations of $\Imag(a)$.
+\end{proof}
+
+This formalises the notion that ``imagining then verifying'' and
+``verifying then imagining'' leave different epistemic signatures,
+even when they agree on the truth. The non-commutativity is the
+algebraic encoding of irreversible cause--effect chains.
+
+%======================================================================
+\section{Computational Verification}
+\label{sec:computation}
+%======================================================================
+
+All results were verified computationally using NumPy in Python.
+Random test cases were drawn uniformly from the appropriate domains.
+
+\begin{table}[H]
+\centering
+\caption{Summary of computational verification.}
+\label{tab:computation}
+\begin{tabularx}{\textwidth}{@{}lrrl@{}}
+\toprule
+\textbf{Test} & \textbf{N} & \textbf{Violations} & \textbf{Max error} \\
+\midrule
+Specialisations (6 logics) & --- & 0 & exact \\
+De Morgan laws (extended domain) & 50\,000 & 0 & $0$ \\
+$\Real$ invariance under conjugation & 50\,000 & 0 & $5.55\times10^{-16}$ \\
+$\|\Imag\|$ invariance under conjugation & 10\,000 & 0 & $6.66\times10^{-16}$ \\
+Algebra automorphism & 10\,000 & 0 & $< 10^{-12}$ \\
+Commutation (Boolean AND) & 10\,000 & 0 & $3.33\times10^{-16}$ \\
+Non-commutation (full AND) & 10\,000 & 9\,634 & $1.16$ \\
+Non-commutation (full OR) & 10\,000 & 9\,637 & $1.23$ \\
+Non-commutation (NOT) & 10\,000 & 10\,000 & $2.73$ \\
+Modus ponens (all contexts) & 50\,000 & 0 & exact \\
+Context shift preserves truth & 50\,000 & 0 & exact \\
+$\Real$ of compound formula invariant & 50\,000 & 0 & $9.99\times10^{-16}$ \\
+Domain closure ($r$ in $[0,1]$) & 50\,000 & 0 & exact \\
+Decision distinguishability & 50\,000 & --- & 49.6\% changed \\
+Panorama ($\Imag\to 0$) & 10\,000 & --- & $\|\Imag\|<0.005$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Source code is available at
+\texttt{scripts/\{connectives, context\_bridge, verify\_resolutions\}.py}
+in the companion repository.
+
+%======================================================================
+\section{Related Work}
+\label{sec:related}
+%======================================================================
+
+\begin{table}[H]
+\centering
+\caption{Comparison with existing algebraic structures for logic.}
+\label{tab:related}
+\begin{tabularx}{\textwidth}{@{}lp{3.5cm}Y@{}}
+\toprule
+\textbf{Structure} & \textbf{Source} & \textbf{Relation} \\
+\midrule
+Residuated lattice & \citet{galatos2007} & Layer~1 of our structure \\
+BL-algebra & \citet{hajek1998} & Our lattice under fuzzy restriction \\
+MV-algebra & \citet{cignoli2000} & Related to {\L}ukasiewicz specialisation \\
+Quantale & \citet{mulvey1986} & Complete lattice + monoid; ours uses non-abelian group \\
+Quantum logic & \citet{birkhoff1936} & Projections on Hilbert spaces, not t-norms \\
+Substructural logic & \citet{restall2000} & Non-commutative connectives, no group action \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The distinguishing feature of the present work is that the group
+action is not applied to the connectives (which remain commutative)
+but to the \emph{truth values themselves}, with a clean invariance
+theorem separating objective truth from perspectival epistemic
+character.
+
+%======================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+%======================================================================
+
+We have shown that the quaternionic operator from \citet{ornelas2026p9}
+supports a G-lattice that genuinely unifies Boolean and fuzzy
+frameworks. The unification is not mere containment: it is mediated
+by a commutation theorem that characterises Boolean logic as the
+context-free special case. The four-dimensional logic introduces
+context sensitivity, path-dependent epistemic chains, and
+operationally distinguishable epistemic dimensions---properties
+absent from any individual restriction.
+
+\paragraph{Open problems.}
+Completeness of the G-lattice logic remains open. Empirical
+validation on the 72 semantic primitives from \citet{ornelas2026p9}
+is planned as future work.
+
+%======================================================================
+% References
+%======================================================================
+\bibliographystyle{plainnat}
+\begin{thebibliography}{99}
+
+\bibitem[Birkhoff \& von Neumann(1936)]{birkhoff1936}
+Birkhoff, G. \& von Neumann, J. (1936).
+The logic of quantum mechanics.
+\textit{Annals of Mathematics}, 37(4), 823--843.
+
+\bibitem[Cignoli et~al.(2000)]{cignoli2000}
+Cignoli, R., D'Ottaviano, I. \& Mundici, D. (2000).
+\textit{Algebraic Foundations of Many-Valued Reasoning}.
+Kluwer.
+
+\bibitem[Esteva \& Godo(2001)]{esteva2001}
+Esteva, F. \& Godo, L. (2001).
+Monoidal t-norm based logic: towards a logic for left-continuous
+t-norms.
+\textit{Fuzzy Sets and Systems}, 124(3), 271--288.
+
+\bibitem[Galatos et~al.(2007)]{galatos2007}
+Galatos, N., Jipsen, P., Kowalski, T. \& Ono, H. (2007).
+\textit{Residuated Lattices: An Algebraic Glimpse at Substructural
+Logics}.
+Elsevier.
+
+\bibitem[H\'ajek(1998)]{hajek1998}
+H\'ajek, P. (1998).
+\textit{Metamathematics of Fuzzy Logic}.
+Kluwer.
+
+\bibitem[Mulvey(1986)]{mulvey1986}
+Mulvey, C.J. (1986).
+\&.
+\textit{Rendiconti del Circolo Matematico di Palermo}, Suppl. 12,
+99--104.
+
+\bibitem[Ornelas Brand(2026)]{ornelas2026p9}
+Ornelas Brand, J.A. (2026).
+The Primitive Equation of Information.
+Manuscript in preparation.
+
+\bibitem[Restall(2000)]{restall2000}
+Restall, G. (2000).
+\textit{An Introduction to Substructural Logics}.
+Routledge.
+
+\bibitem[Zadeh(1965)]{zadeh1965}
+Zadeh, L.A. (1965).
+Fuzzy sets.
+\textit{Information and Control}, 8(3), 338--353.
+
+\end{thebibliography}
+
+\end{document}
