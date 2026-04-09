@@ -1,59 +1,86 @@
-# Quaternionic Logic: Formal Connectives over a 4D Semantic Operator
+# Quaternionic Logic: A G-Lattice Unifying Boolean and Fuzzy Frameworks
 
-**Status:** In preparation
+**Author:** J. Arturo Ornelas Brand — arturoornelas62@gmail.com
+**Status:** Computational verification complete. Paper in preparation.
 
-**Author:** J. Arturo Ornelas Brand --- arturoornelas62@gmail.com
+## Result
 
-## Goal
+A formal logic defined as a **G-lattice**: a bounded residuated lattice on [0,1] x R^3 equipped with an SU(2) group action by quaternionic conjugation.
 
-Define a formal logic with connectives and inference rules over the quaternionic operator O = {0, 1, +, i, j, k} from the Primitive Equation of Information (P9), such that:
+- **Connectives** (AND, OR, NOT, IMPLIES) define _what_ is true
+- **Conjugation** q\*a\*q^{-1} defines _from which perspective_ you evaluate
+- **Central theorem:** connectives commute with context transformations if and only if they operate only on the real component
+- **Corollary:** Boolean logic is the context-free special case. Full quaternionic logic is context-dependent.
 
-1. Under Boolean restriction (i=j=k=0, r in {0,1}): connectives reduce to classical logic
-2. Under Fuzzy restriction (i=j=k=0, r in [0,1]): connectives reduce to Zadeh/t-norm fuzzy logic
-3. Under Modal restriction (j=k=0): connectives recover necessity/possibility
-4. Under full 4D: a new logic emerges with provable properties
+Six known logics (Boolean, fuzzy, modal, trivalent, ordinal, probabilistic) are recovered as dimensional restrictions. No exact precedent for this combination (residuated lattice + SU(2) conjugation with real-part invariance) was found in the literature.
 
-## What exists
+## Key findings
 
-- The operator O and its 6 algebraic layers (P9: `primitive-equation-paper/`)
-- Recovery theorem: each classical system is a dimensional restriction of [0,1]^4
-- Quaternionic product on S^3 verified at machine precision (P9)
-- 72 semantic primitives with explicit (r,i,j,k) coordinates from trained neural models
+| Property | Evidence |
+|---------|---------|
+| 7/7 specializations verified | `scripts/connectives.py` |
+| Re invariant under all context changes | max error 5.55e-16 |
+| Soundness (modus ponens in all contexts) | 0 violations / 50K tests |
+| Domain [0,1] x R^3 closed | 0 violations / 50K tests |
+| (i,j,k) operationally distinguishable | decisions change 49.6%, truth changes 0% |
+| Panorama = Boolean logic | Im averages to ~0 over SU(2) |
 
-## What needs to be done
+Full results: [`RESULTS.md`](RESULTS.md)
 
-### Theory (paper)
-- [ ] Define connectives: AND, OR, NOT, IMPLIES over [0,1]^4
-- [ ] Choose t-norm family (min/max, product/sum, Lukasiewicz, or novel)
-- [ ] Prove specialization: connectives reduce to known logics under each restriction
-- [ ] Define implication and inference rules
-- [ ] Prove soundness
-- [ ] Investigate completeness
-- [ ] Compare with existing multi-valued logics (Hajek BL, MTL, MV-algebras)
-- [ ] Investigate relationship between quaternionic product and logical connectives
-
-### Code (verification)
-- [ ] Implement connectives in Python
-- [ ] Verify specialization computationally for all 6 restrictions
-- [ ] Truth table generation for 4D logic
-- [ ] Test on 72 primitives: do logical operations on primitive coordinates produce semantically meaningful results?
-- [ ] Compare with standard fuzzy logic libraries
-
-## Key references
-
-- Zadeh, L.A. (1965). Fuzzy sets. Information and Control, 8(3), 338-353.
-- Hajek, P. (1998). Metamathematics of Fuzzy Logic. Kluwer.
-- Esteva, F. & Godo, L. (2001). Monoidal t-norm based logic. Fuzzy Sets and Systems, 124(3), 271-288.
-- Cignoli, R., D'Ottaviano, I., & Mundici, D. (2000). Algebraic Foundations of Many-Valued Reasoning. Kluwer.
-- Ornelas Brand, J.A. (2026). The Primitive Equation of Information. (P9, companion paper)
-
-## Structure (planned)
+## Repository structure
 
 ```
-README.md                  This file
-quaternionic_logic.tex     Paper
+README.md                              This file
+RESULTS.md                             Complete computational results and theoretical findings
+LICENSE                                BUSL-1.1
 scripts/
-  connectives.py           Connective definitions + specialization verification
-  truth_tables.py          4D truth table generation
-  test_primitives.py       Test on 72 semantic primitives
+  connectives.py                       Connective definitions + 7/7 specialization verification
+  explore_quaternion_interaction.py     Product-connective interaction exploration
+  bridge_exploration.py                Failed and successful bridge attempts
+  context_bridge.py                    G-lattice: conjugation as context transformation
+  verify_resolutions.py                Verification of domain, soundness, non-decoration
+paper/
+  quaternionic_logic.tex               Paper (forthcoming)
 ```
+
+## Dependencies
+
+- Python 3.8+
+- NumPy
+
+## Running
+
+```bash
+# Verify all specializations (7/7)
+python scripts/connectives.py
+
+# Explore product-connective interaction
+python scripts/explore_quaternion_interaction.py
+
+# Bridge exploration (failed attempts + alpha family)
+python scripts/bridge_exploration.py
+
+# G-lattice verification (central theorem)
+python scripts/context_bridge.py
+
+# Verify resolved open problems (domain, soundness, non-decoration)
+python scripts/verify_resolutions.py
+```
+
+## Companion work
+
+This project builds on:
+
+- **P9:** [The Primitive Equation of Information](../primitive-equation-paper/) — provides the operator O = {0, 1, +, i, j, k}, the Four Kingdoms, and the 72 semantic primitives
+- **La Danza Cosmica de los Opuestos** (book, in preparation) — philosophical framework establishing the anchor/perspective system that this paper formalizes
+
+## Citation
+
+```
+Ornelas Brand, J.A. (2026). Quaternionic Logic: A G-Lattice Unifying
+Boolean and Fuzzy Frameworks. In preparation.
+```
+
+## License
+
+Business Source License 1.1 (BUSL-1.1)
