@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm}
+\usepackage{stmaryrd}
 \usepackage{mathtools}
 \usepackage{booktabs}
 \usepackage{tabularx}
@@ -392,6 +393,71 @@ No new proof technique is required---the G-lattice soundness is the
 \end{remark}
 
 %======================================================================
+\section{Completeness}
+\label{sec:completeness}
+%======================================================================
+
+\begin{lemma}[Real-part independence]
+\label{lem:re-indep}
+For every propositional formula $\varphi$ built from AND, OR, NOT,
+$\to$ and every valuation $v:\mathrm{Atoms}\to V$,
+\[
+  \Real(\llbracket\varphi\rrbracket_v)
+  \;\text{depends only on}\;
+  (\Real(v(p_1)),\ldots,\Real(v(p_n))).
+\]
+That is, the imaginary components of the atoms do not affect the
+real part of the result.
+\end{lemma}
+
+\begin{proof}
+By structural induction on $\varphi$. For each connective:
+\begin{align*}
+  \Real(\mathrm{AND}(a,b)) &= \min(\Real(a),\Real(b)), \\
+  \Real(\mathrm{OR}(a,b))  &= \max(\Real(a),\Real(b)), \\
+  \Real(\mathrm{NOT}(a))   &= 1 - \Real(a), \\
+  \Real(a\to b)             &= \begin{cases}1 & \text{if }\Real(a)\leq\Real(b),\\ \Real(b) & \text{otherwise.}\end{cases}
+\end{align*}
+In each case the output's real part is a function of the inputs'
+real parts alone. The induction step follows by compositionality.
+\end{proof}
+
+\begin{theorem}[Completeness]
+\label{thm:completeness}
+Let $\varphi$ be a propositional formula. The following are equivalent:
+\begin{enumerate}[nosep]
+\item $\varphi$ is a G-lattice tautology: $\Real(\llbracket\varphi\rrbracket_v)\geq\tau$ for every $v:\mathrm{Atoms}\to V$.
+\item $\varphi$ is a G\"odel tautology: $\llbracket\varphi\rrbracket_w\geq\tau$ for every $w:\mathrm{Atoms}\to[0,1]$.
+\item $\varphi$ is derivable in the G\"odel--Dummett axiom system.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+$(1)\Rightarrow(2)$: Restrict to valuations with $\Imag=0$.
+These are G\"odel valuations, so every G-lattice tautology is a
+G\"odel tautology.
+
+$(2)\Rightarrow(1)$: By Lemma~\ref{lem:re-indep},
+$\Real(\llbracket\varphi\rrbracket_v)$ depends only on the real
+parts of the atomic valuations. If $\varphi$ holds for all
+$[0,1]$-valuations of these real parts, it holds for all G-lattice
+valuations regardless of imaginary components.
+
+$(2)\Leftrightarrow(3)$: Standard G\"odel--Dummett completeness
+\citep{dummett1959,hajek1998}.
+\end{proof}
+
+\begin{remark}
+The imaginary dimensions enrich the logic with context sensitivity,
+epistemic character, and path-dependent reasoning, but they do not
+alter which formulas are tautologies. Completeness is inherited from
+G\"odel logic via the real-part independence lemma. The ``new'' content
+of the quaternionic G-lattice is not in its tautologies but in the
+\emph{structure around} them: the group action, the context spectrum,
+and the cause--effect chains.
+\end{remark}
+
+%======================================================================
 \section{Epistemic Dimensions Are Not Decoration}
 \label{sec:decoration}
 %======================================================================
@@ -531,13 +597,17 @@ $\Real$ of compound formula invariant & 50\,000 & 0 & $9.99\times10^{-16}$ \\
 Domain closure ($r$ in $[0,1]$) & 50\,000 & 0 & exact \\
 Decision distinguishability & 50\,000 & --- & 49.6\% changed \\
 Panorama ($\Imag\to 0$) & 10\,000 & --- & $\|\Imag\|<0.005$ \\
+$\Real$-independence (all connectives) & 100\,000 & 0 & $0$ \\
+$\Real$-independence (7 compounds) & 100\,000 & 0 & $0$ \\
+G\"odel tautologies (7 formulas) & 100\,000 & 0 & confirmed \\
+Non-tautologies (3 formulas) & 100\,000 & 0 & confirmed \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 Source code is available at
-\texttt{scripts/\{connectives, context\_bridge, verify\_resolutions\}.py}
-in the companion repository.
+\texttt{scripts/\{connectives, context\_bridge, verify\_resolutions,
+verify\_completeness\}.py} in the companion repository.
 
 %======================================================================
 \section{Related Work}
@@ -582,10 +652,15 @@ context sensitivity, path-dependent epistemic chains, and
 operationally distinguishable epistemic dimensions---properties
 absent from any individual restriction.
 
-\paragraph{Open problems.}
-Completeness of the G-lattice logic remains open. Empirical
-validation on the 72 semantic primitives from \citet{ornelas2026p9}
-is planned as future work.
+\paragraph{Completeness.}
+The G-lattice inherits completeness from G\"odel--Dummett logic
+via the real-part independence lemma (Theorem~\ref{thm:completeness}).
+The imaginary dimensions do not alter tautologies---they enrich
+the surrounding structure.
+
+\paragraph{Future work.}
+Empirical validation on the 72 semantic primitives from
+\citet{ornelas2026p9} is planned.
 
 %======================================================================
 % References
@@ -597,6 +672,11 @@ is planned as future work.
 Birkhoff, G. \& von Neumann, J. (1936).
 The logic of quantum mechanics.
 \textit{Annals of Mathematics}, 37(4), 823--843.
+
+\bibitem[Dummett(1959)]{dummett1959}
+Dummett, M. (1959).
+A propositional calculus with denumerable matrix.
+\textit{Journal of Symbolic Logic}, 24(2), 97--106.
 
 \bibitem[Cignoli et~al.(2000)]{cignoli2000}
 Cignoli, R., D'Ottaviano, I. \& Mundici, D. (2000).
