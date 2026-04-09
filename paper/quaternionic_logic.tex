@@ -53,7 +53,7 @@
 \begin{abstract}
 %======================================================================
 We define a formal logic over the four-dimensional space
-$[0,1]\times\mathbb{R}^3$, where the real component encodes truth
+$V=[0,1]\times[-1,1]^3$, where the real component encodes truth
 and the imaginary components encode epistemic character. Logical
 connectives (AND, OR, NOT, implication) are defined as a bounded
 residuated lattice. An $\SU$ group acts on truth values by quaternionic
@@ -64,9 +64,10 @@ The central result is a \emph{commutation theorem}: lattice
 connectives commute with the group action if and only if they
 operate exclusively on the real component. Boolean logic therefore
 emerges as the \emph{context-free} (group-invariant) special case,
-while the full four-dimensional logic is context-dependent. Six
-known logics---Boolean, fuzzy, modal, trivalent, ordinal, and
-probabilistic---are recovered as dimensional restrictions.
+while the full four-dimensional logic is context-dependent. Boolean
+and G\"odel fuzzy logic are recovered exactly as dimensional
+restrictions; four additional logics (modal, trivalent, ordinal,
+probabilistic) admit interpretive correspondences.
 
 The combined structure is a \emph{G-lattice}: a residuated lattice
 equipped with a non-abelian group action. No exact precedent for
@@ -107,8 +108,9 @@ and selection ($\recu{k}$).
 
 \paragraph{Contributions.}
 \begin{enumerate}[nosep]
-\item A bounded residuated lattice on $[0,1]\times\mathbb{R}^3$
-  that recovers six known logics as dimensional restrictions
+\item A bounded residuated lattice on $[0,1]\times[-1,1]^3$
+  that recovers Boolean and G\"odel fuzzy logic exactly, with
+  interpretive correspondences to four others
   (Section~\ref{sec:lattice}).
 \item A commutation theorem characterising Boolean logic as the
   group-invariant sublattice (Section~\ref{sec:glattice}).
@@ -172,23 +174,24 @@ operator corresponds to an irreducible mode of information:
 \begin{definition}[Truth values]
 \label{def:truth}
 A \emph{quaternionic truth value} is an element
-$a=(\rey{r},\imag{i},\exac{j},\recu{k})\in[0,1]\times\mathbb{R}^3$.
+$a=(\rey{r},\imag{i},\exac{j},\recu{k})\in V=[0,1]\times[-1,1]^3$.
 The component $\rey{r}\in[0,1]$ is the \emph{degree of truth}.
-The triple $(\imag{i},\exac{j},\recu{k})\in\mathbb{R}^3$ is the
+The triple $(\imag{i},\exac{j},\recu{k})\in[-1,1]^3$ is the
 \emph{epistemic character}.
 \end{definition}
 
 \begin{definition}[Connectives]
 \label{def:connectives}
-Define component-wise operations on $V=[0,1]\times\mathbb{R}^3$:
+Define component-wise operations on $V=[0,1]\times[-1,1]^3$:
 \begin{align}
   \mathrm{AND}(a,b) &= (\min(a_r,b_r),\;\min(a_i,b_i),\;\min(a_j,b_j),\;\min(a_k,b_k)), \\
   \mathrm{OR}(a,b) &= (\max(a_r,b_r),\;\max(a_i,b_i),\;\max(a_j,b_j),\;\max(a_k,b_k)), \\
   \mathrm{NOT}(a) &= (1-a_r,\;-a_i,\;-a_j,\;-a_k), \label{eq:not}\\
-  a\to b &= \begin{cases}
-    (1,\ldots) & \text{if } a_m\leq b_m \text{ for each } m,\\
-    (b_m)_m    & \text{otherwise (component-wise G\"odel residuum).}
+  (a\to b)_m &= \begin{cases}
+    1 & \text{if } a_m\leq b_m,\\
+    b_m & \text{otherwise,}
   \end{cases}
+  \quad\text{for each component } m\in\{r,i,j,k\}. \label{eq:imp}
 \end{align}
 \end{definition}
 
@@ -204,48 +207,72 @@ direction ($-i,-j,-k$).
 \label{prop:lattice}
 $(V,\mathrm{AND},\mathrm{OR},\mathrm{NOT},\to,\mathbf{0},\mathbf{1})$
 is a bounded residuated lattice with bounds
-$\mathbf{0}=(0,0,0,0)$ and $\mathbf{1}=(1,0,0,0)$.
+$\mathbf{0}=(0,-1,-1,-1)$ and $\mathbf{1}=(1,1,1,1)$
+under the component-wise order.
 \end{proposition}
 
 \begin{proof}
-Component-wise min and max form a bounded distributive lattice on
-each component. The G\"odel residuum satisfies the residuation
-condition by construction. De Morgan laws hold:
+Component-wise min and max on the bounded intervals
+$[0,1]\times[-1,1]^3$ form a bounded distributive lattice with
+$\mathbf{0}\leq a\leq\mathbf{1}$ for all $a\in V$.
+
+\emph{Residuation.} We verify $\mathrm{AND}(a,b)\leq c$ iff
+$a\leq(b\to c)$ for all $a,b,c\in V$, component by component.
+Fix any component $m$.
+$(\Rightarrow)$: If $b_m\leq c_m$, then $(b\to c)_m=1\geq a_m$.
+If $b_m>c_m$, then $(b\to c)_m=c_m$ and we need $a_m\leq c_m$.
+From $\min(a_m,b_m)\leq c_m$ and $b_m>c_m$ it follows that
+$a_m\leq b_m$, hence $\min(a_m,b_m)=a_m\leq c_m$.
+$(\Leftarrow)$: If $b_m\leq c_m$, then $\min(a_m,b_m)\leq b_m\leq c_m$.
+If $b_m>c_m$, then $a_m\leq(b\to c)_m=c_m$, so
+$\min(a_m,b_m)\leq a_m\leq c_m$.
+
+\emph{De Morgan laws.}
 $\mathrm{NOT}(\mathrm{AND}(a,b))=\mathrm{OR}(\mathrm{NOT}(a),\mathrm{NOT}(b))$
-because $1-\min(x,y)=\max(1-x,1-y)$ for the real component and
+holds because $1-\min(x,y)=\max(1-x,1-y)$ for the real component and
 $-\min(x,y)=\max(-x,-y)$ for imaginary components.
 \end{proof}
 
 \subsection{Specialisations}
 
-\begin{theorem}[Recovery of six logics]
+\begin{theorem}[Exact recovery]
 \label{thm:recovery}
-Under dimensional restrictions, the lattice $(V,\mathrm{AND},\mathrm{OR},\mathrm{NOT},\to)$ reduces to:
+Under dimensional restrictions, the lattice $(V,\mathrm{AND},\mathrm{OR},\mathrm{NOT},\to)$ reduces exactly to:
 \begin{enumerate}[nosep]
 \item \textbf{Boolean}: $i=j=k=0$, $r\in\{0,1\}$
   $\Rightarrow$ classical propositional logic.
-\item \textbf{Fuzzy}: $i=j=k=0$, $r\in[0,1]$
+\item \textbf{G\"odel fuzzy}: $i=j=k=0$, $r\in[0,1]$
   $\Rightarrow$ G\"odel fuzzy logic (min t-norm).
-\item \textbf{Modal}: $j=k=0$, $r,i\in[0,1]$
-  $\Rightarrow$ necessity ($r=i=1$) and possibility ($r>0$ or $i>0$).
-\item \textbf{Trivalent}: $i=k=0$, $j\in[-1,1]$
-  $\Rightarrow$ three-valued logic via $j\mapsto\{-1,0,+1\}$.
-\item \textbf{Ordinal}: $j=k=0$, $i$ encodes rank
-  $\Rightarrow$ comparative/ordinal logic.
-\item \textbf{Probabilistic}: $j=k=0$, $i$ encodes variance
-  $\Rightarrow$ interval-valued probabilistic bounds.
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-Each restriction projects the four-dimensional connectives onto the
-active subspace. Under restriction~(1), min on $\{0,1\}$ is Boolean
-AND; max is Boolean OR; $1-r$ is classical negation. The remaining
-cases follow by analogous projection, with the trivalent case using
-the sign of $j$ to encode the third value. Full verification for
-all six cases is provided computationally in
-Section~\ref{sec:computation}.
+Under restriction~(1), $V$ collapses to $\{0,1\}$: min is Boolean
+AND, max is Boolean OR, $1-r$ is classical negation, and the
+residuum gives material implication. Under~(2), $V$ collapses to
+$[0,1]$ with the standard G\"odel connectives
+\citep{hajek1998}. Both are isomorphisms, not merely embeddings.
 \end{proof}
+
+\begin{remark}[Interpretive correspondences]
+\label{rem:interpretive}
+Four additional logics admit \emph{interpretive correspondences}
+(not formal isomorphisms) under dimensional restriction:
+\begin{enumerate}[nosep,start=3]
+\item \textbf{Modal}: $j=k=0$, $r,i\in[0,1]$, reading
+  necessity as $r=i=1$ and possibility as $r>0\lor i>0$.
+\item \textbf{Trivalent}: $i=k=0$, $j\in\{-1,0,+1\}$,
+  encoding the third value via the sign of $j$.
+\item \textbf{Ordinal}: $j=k=0$, $i$ encoding rank.
+\item \textbf{Probabilistic}: $j=k=0$, $i$ encoding variance.
+\end{enumerate}
+These are suggestive readings of the restricted subspaces, not
+claims that a modal or probabilistic logician would recognise
+their formal system. The value of the quaternionic lattice rests
+on the exact recovery of Boolean and G\"odel logic and the
+commutation theorem (Theorem~\ref{thm:commutation}), not on
+these looser analogies.
+\end{remark}
 
 %======================================================================
 \section{The G-Lattice: Context as Group Action}
@@ -279,18 +306,28 @@ The conjugation action satisfies:
 \item $\Real(q\cdot a)=\Real(a)$ \hfill(truth is objective),
 \item $\|\Imag(q\cdot a)\|=\|\Imag(a)\|$ \hfill(epistemic weight is conserved),
 \item $\|q\cdot a\|=\|a\|$ \hfill(information is conserved),
-\item $q\cdot(a\cdot_{\mathbb{H}} b)=(q\cdot a)\cdot_{\mathbb{H}}(q\cdot b)$ \hfill(algebra automorphism),
-\item $q\cdot\mathbf{0}=\mathbf{0}$, \quad $q\cdot\mathbf{1}=\mathbf{1}$ \hfill(bounds preserved).
+\item $q\cdot(a\cdot_{\mathbb{H}} b)=(q\cdot a)\cdot_{\mathbb{H}}(q\cdot b)$ \hfill(algebra automorphism).
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
 Properties (1)--(3) follow from equations~\eqref{eq:re-inv}--\eqref{eq:total-norm}.
 Property (4): $q(ab)\bar{q}=(qa\bar{q})(qb\bar{q})$ by
-associativity and $\bar{q}q=1$. Property (5):
-$q\cdot(0,0,0,0)=(0,0,0,0)$ trivially, and
-$q\cdot(1,0,0,0)=(1,0,0,0)$ because $(1,0,0,0)$ has zero imaginary part.
+associativity and $\bar{q}q=1$.
 \end{proof}
+
+\begin{remark}[Domain of the action]
+\label{rem:domain}
+Conjugation acts on $\Imag(a)$ as an $\mathrm{SO}(3)$ rotation,
+preserving $\|\Imag\|$ but potentially redistributing components
+beyond $[-1,1]$ when $\|\Imag(a)\|>1$. The action is therefore
+defined on the ambient space $[0,1]\times\mathbb{R}^3\supseteq V$.
+Every purely real element $(r,0,0,0)$ is a fixed point, so the
+Boolean sublattice ($\Imag=0$) is always preserved. The logical
+content of the G-lattice depends only on $\Real$ (by
+Lemma~\ref{lem:re-indep}), so the domain extension does not
+affect tautologies or derivability.
+\end{remark}
 
 \begin{theorem}[Commutation theorem]
 \label{thm:commutation}
@@ -320,6 +357,17 @@ min/max of the original components (since min does not commute with
 rotation). Hence the two sides differ.
 \end{proof}
 
+\begin{example}[Explicit non-commutation]
+\label{ex:noncommute}
+Let $a=(0.7,0.3,0.5,0.1)$, $b=(0.4,0.8,0.2,0.6)$, and
+$q=\tfrac{1}{\sqrt{2}}(1,1,0,0)$.
+Then $q\cdot\mathrm{AND}(a,b)=(0.4,\;0.3,\;{-0.1},\;0.2)$ while
+$\mathrm{AND}(q\cdot a,\;q\cdot b)=(0.4,\;0.3,\;{-0.6},\;0.2)$;
+the $j$-components differ ($-0.1$ vs $-0.6$).
+The real parts agree ($0.4=0.4$), confirming that the
+non-commutation is purely epistemic.
+\end{example}
+
 \begin{corollary}[Boolean logic is context-free]
 \label{cor:boolean}
 The sublattice $\{a\in V:\Imag(a)=0\}$ is the unique maximal
@@ -340,8 +388,8 @@ This equals the maximum displacement $\max_{q\in\SU}\|q\cdot a - a\|$.
 The context sensitivity provides a continuous spectrum:
 $\sigma=0$ corresponds to Boolean logic (context-free),
 and increasing $\sigma$ gives progressively more
-context-dependent logics. The spectrum is parameterised by
-$\|\Imag(a)\|\in[0,\infty)$.
+context-dependent logics. For truth values in $V$, the spectrum
+is parameterised by $\|\Imag(a)\|\in[0,\sqrt{3}]$.
 \end{remark}
 
 %======================================================================
@@ -625,6 +673,7 @@ verify\_completeness\}.py} in the companion repository.
 Residuated lattice & \citet{galatos2007} & Layer~1 of our structure \\
 BL-algebra & \citet{hajek1998} & Our lattice under fuzzy restriction \\
 MV-algebra & \citet{cignoli2000} & Related to {\L}ukasiewicz specialisation \\
+Quaternionic fuzzy sets & \citet{dai2023} & Quaternion-valued membership; no group action, no logic \\
 Quantale & \citet{mulvey1986} & Complete lattice + monoid; ours uses non-abelian group \\
 Quantum logic & \citet{birkhoff1936} & Projections on Hilbert spaces, not t-norms \\
 Substructural logic & \citet{restall2000} & Non-commutative connectives, no group action \\
@@ -632,11 +681,21 @@ Substructural logic & \citet{restall2000} & Non-commutative connectives, no grou
 \end{tabularx}
 \end{table}
 
-The distinguishing feature of the present work is that the group
-action is not applied to the connectives (which remain commutative)
-but to the \emph{truth values themselves}, with a clean invariance
-theorem separating objective truth from perspectival epistemic
-character.
+The closest antecedent is \citet{dai2023}, who defines
+quaternionic fuzzy \emph{sets} with quaternion-valued membership
+functions bounded by unit modulus. The present work differs in
+three respects: (i)~we define a propositional \emph{logic} with
+inference rules, soundness, and completeness, not only set
+operations; (ii)~we add a group action that separates truth from
+epistemic character via the commutation theorem; (iii)~our domain
+is component-wise bounded ($[0,1]\times[-1,1]^3$) rather than
+modulus-bounded.
+
+More broadly, the distinguishing feature of the present work is
+that the group action is not applied to the connectives (which
+remain commutative) but to the \emph{truth values themselves},
+with a clean invariance theorem separating objective truth from
+perspectival epistemic character.
 
 %======================================================================
 \section{Conclusion}
@@ -677,6 +736,11 @@ The logic of quantum mechanics.
 Dummett, M. (1959).
 A propositional calculus with denumerable matrix.
 \textit{Journal of Symbolic Logic}, 24(2), 97--106.
+
+\bibitem[Dai(2023)]{dai2023}
+Dai, S. (2023).
+Quaternionic fuzzy sets.
+\textit{Axioms}, 12(5), 490.
 
 \bibitem[Cignoli et~al.(2000)]{cignoli2000}
 Cignoli, R., D'Ottaviano, I. \& Mundici, D. (2000).

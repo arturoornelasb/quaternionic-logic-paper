@@ -262,9 +262,9 @@ The three problems below were initially flagged as open gaps. Each is resolved b
     r in [0, 1]        (degree of crystallized presence -- always non-negative)
     i, j, k in R       (epistemic character -- signed, relative to anchor)
 
-The sign of an imaginary component is not "good/bad" but direction relative to the anchor. Conjugation rotates direction while preserving r and ||(i,j,k)||. The domain [0,1] x R^3 is naturally closed under conjugation.
+The sign of an imaginary component is not "good/bad" but direction relative to the anchor. Conjugation rotates direction while preserving r and ||(i,j,k)||. The lattice domain is V = [0,1] x [-1,1]^3 with bounds 0 = (0,-1,-1,-1) and 1 = (1,1,1,1). Conjugation extends to the ambient space [0,1] x R^3.
 
-**Computational note:** Connective definitions extend to signed components without modification: min, max, and (1-x) are well-defined on R. The residuated lattice structure extends naturally to the ordered set [0,1] x R^3 with component-wise order.
+**Computational note:** Connective definitions extend to signed components without modification: min, max, and (1-x) are well-defined on R. The residuated lattice structure is defined on [0,1] x [-1,1]^3 with component-wise order.
 
 ### 7.2 Soundness (RESOLVED)
 
@@ -342,7 +342,7 @@ Both teams agree the goal happened (same Re). But:
 
 **The decision depends on (i,j,k), not only on r.**
 
-**Formal argument:** Define a decision function D: [0,1] x R^3 -> Actions that depends on the full truth value, not just Re. Then:
+**Formal argument:** Define a decision function D: [0,1] x [-1,1]^3 -> Actions that depends on the full truth value, not just Re. Then:
 - D(0.9, +0.5, +0.8, +0.7) = celebrate
 - D(0.9, -0.5, -0.8, +0.7) = lament
 
