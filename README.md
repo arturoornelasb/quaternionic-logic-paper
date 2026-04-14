@@ -92,6 +92,8 @@ Three companion papers extend the framework developed here:
 
 ## Citation
 
+This paper:
+
 ```
 Ornelas Brand, J.A. (2026). Quaternionic Logic: A G-Lattice Unifying
 Boolean and Fuzzy Frameworks (v0.1.1). Zenodo.
@@ -100,6 +102,28 @@ https://doi.org/10.5281/zenodo.19562014
 
 Concept DOI (all versions): [10.5281/zenodo.19560986](https://doi.org/10.5281/zenodo.19560986)
 
+Companion papers:
+
+```
+Ornelas Brand, J.A. (2026). Toward a Non-Commutative Residuated Lattice
+from Quaternion Multiplication (v0.1.0). Zenodo.
+https://doi.org/10.5281/zenodo.19561407
+```
+
+```
+Ornelas Brand, J.A. (2026). Duality Synthesis in Quaternionic Logic:
+How Opposites Generate Truth (v0.1.0). Zenodo.
+https://doi.org/10.5281/zenodo.19561634
+```
+
+```
+Ornelas Brand, J.A. (2026). Pre-Logical States and the Birth of
+Information (v0.1.0). Zenodo.
+https://doi.org/10.5281/zenodo.19561722
+```
+
 ## License
 
-Business Source License 1.1 (BUSL-1.1)
+Business Source License 1.1 (BSL 1.1). Non-production use is permitted. On the Change Date (**2030-04-09**), or the fourth anniversary of the first publicly available distribution of a given version, whichever comes first, the work becomes available under the Change License (**Apache License, Version 2.0**).
+
+For alternative licensing arrangements, contact arturoornelas62@gmail.com. See [`LICENSE`](LICENSE) for full terms.
