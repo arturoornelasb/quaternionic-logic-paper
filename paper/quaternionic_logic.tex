@@ -13,6 +13,8 @@
 \usepackage{enumitem}
 \usepackage{float}
 \usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -22,6 +24,7 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{openquestion}{Open Question}
+\newtheorem{axiom}{Axiom}
 
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
@@ -39,12 +42,67 @@
 \newcommand{\Real}{\operatorname{Re}}
 \newcommand{\Imag}{\operatorname{Im}}
 \newcommand{\SU}{\mathrm{SU}(2)}
+\newcommand{\LZ}{\mathcal{Z}}
+
+% -- tcolorbox styles --
+\newtcolorbox{reinoR}{
+  colback=rcolor!5, colframe=rcolor!40,
+  fonttitle=\bfseries\color{rcolor!80!black},
+  boxrule=0.4pt, arc=4pt,
+  title={Axis $\rey{r}$ --- The Conceptual}
+}
+\newtcolorbox{reinoI}{
+  colback=icolor!5, colframe=icolor!40,
+  fonttitle=\bfseries\color{icolor!80!black},
+  boxrule=0.4pt, arc=4pt,
+  title={Axis $\imag{i}$ --- The Imaginary}
+}
+\newtcolorbox{reinoJ}{
+  colback=jcolor!5, colframe=jcolor!40,
+  fonttitle=\bfseries\color{jcolor!80!black},
+  boxrule=0.4pt, arc=4pt,
+  title={Axis $\exac{j}$ --- The Exact}
+}
+\newtcolorbox{reinoK}{
+  colback=kcolor!5, colframe=kcolor!40,
+  fonttitle=\bfseries\color{kcolor!80!black},
+  boxrule=0.4pt, arc=4pt,
+  title={Axis $\recu{k}$ --- The Recursive}
+}
+\newtcolorbox{pathologybox}[1][]{
+  colback=black!3, colframe=black!20,
+  fonttitle=\bfseries,
+  boxrule=0.4pt, arc=4pt, #1
+}
+\newtcolorbox{axiombox}[1][]{
+  colback=kcolor!3, colframe=kcolor!30,
+  fonttitle=\bfseries\color{kcolor!80!black},
+  boxrule=0.4pt, arc=4pt,
+  title={#1}
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=kcolor,
+  citecolor=jcolor,
+  urlcolor=rcolor,
+  pdftitle={Quaternionic Logic: A G-Lattice Unifying Boolean and Fuzzy Frameworks},
+  pdfauthor={J. Arturo Ornelas Brand},
+  pdfsubject={Mathematical logic, many-valued logic, quaternionic algebra},
+  pdfkeywords={quaternionic logic, G-lattice, residuated lattice, fuzzy logic, Boolean logic, SU(2), many-valued logic, recursive selection}
+}
+\pdfstringdefDisableCommands{%
+  \def\rey#1{#1}%
+  \def\imag#1{#1}%
+  \def\exac#1{#1}%
+  \def\recu#1{#1}%
+}
 
 \title{Quaternionic Logic: A G-Lattice Unifying\\Boolean and Fuzzy Frameworks}
 \author{J.~Arturo Ornelas Brand\\
   \small Independent Researcher\\
   \small \texttt{arturoornelas62@gmail.com}}
-\date{April 2026}
+\date{April 13, 2026}
 
 \begin{document}
 \maketitle
@@ -52,30 +110,43 @@
 %======================================================================
 \begin{abstract}
 %======================================================================
-We define a formal logic over the four-dimensional space
-$V=[0,1]\times[-1,1]^3$, where the real component encodes truth
-and the imaginary components encode epistemic character. Logical
-connectives (AND, OR, implication) form a bounded residuated
-lattice, equipped with an involutive negation (NOT). An $\SU$ group acts on truth values by quaternionic
-conjugation, defining context transformations that preserve truth
-while rotating epistemic character.
+A layered ontology of 72 semantic primitives across six algebraic
+layers---Boolean, Fuzzy, Ordinal, Modal, Trivalent, and
+Probabilistic---was previously shown to discriminate real knowledge
+domains from pseudoscience controls. However, the six algebras
+remained independent systems with no formal unification.
 
-The central result is a \emph{commutation theorem}: lattice
-connectives commute with the group action if and only if they
-operate exclusively on the real component. Boolean logic therefore
-emerges as the \emph{context-free} (group-invariant) special case,
-while the full four-dimensional logic is context-dependent. Boolean
-and G\"odel fuzzy logic are recovered exactly as dimensional
-restrictions; four additional logics (modal, trivalent, ordinal,
-probabilistic) admit interpretive correspondences.
+We construct a single quaternionic operator
+$\Op=\{0,1,+,\imag{i},\exac{j},\recu{k}\}$ from which all six
+algebras admit dimensional projections---four (Boolean, G\"odel
+fuzzy, G\"odel--Kripke modal, and Kleene trivalent) as exact
+recoveries, two (ordinal and probabilistic) as interpretive
+correspondences. The operator
+assigns to each concept a four-dimensional coordinate
+$(\rey{r},\imag{i},\exac{j},\recu{k})\in[0,1]^4$, where $\rey{r}$
+encodes crystallised truth, $\imag{i}$ encodes potentiality,
+$\exac{j}$ encodes verifiability, and $\recu{k}$ encodes recursive
+selection. Five axioms (K1--K5) characterise $\recu{k}$, and its
+\emph{irreducibility} is proven: no function of
+$(\rey{r},\imag{i},\exac{j})$ can reproduce $\recu{k}$.
+
+Logical connectives on $V=[0,1]\times[-1,1]^3$ form a bounded
+residuated lattice with involutive negation. An $\SU$ group acts on
+truth values by conjugation, defining context transformations that
+preserve truth while rotating epistemic character. The central result
+is a \emph{commutation theorem}: lattice connectives commute with the
+group action if and only if they depend exclusively on the real
+component. Boolean logic emerges as the \emph{context-free}
+(group-invariant) special case.
 
 The combined structure is a \emph{G-lattice}: a residuated lattice
-equipped with a non-abelian group action. To our knowledge, no precedent for
-this specific combination---residuated lattice with $\SU$
-conjugation and real-part invariance---exists in the literature.
-
-All results are verified computationally at machine precision
-($\sim10^{-16}$) over $50{,}000$~test cases.
+equipped with a non-abelian group action. Additional results include:
+a cancellative--generative classification of nine algebras of
+opposition, four diagnosable pathologies as axis collapses, and a
+\emph{liquid zone} (all four axes positive) shown to be open, convex,
+and path-connected. Completeness reduces to $G^\sim$ (G\"odel logic
+with involutive negation). All results are verified computationally at
+machine precision ($\sim10^{-16}$) over $50{,}000$~test cases.
 \end{abstract}
 
 %======================================================================
@@ -83,45 +154,63 @@ All results are verified computationally at machine precision
 \label{sec:intro}
 %======================================================================
 
-Boolean and fuzzy logics are widely regarded as distinct formal
-systems. Boolean logic operates on $\{0,1\}$ with classical
-connectives; fuzzy logic generalises to $[0,1]$ with t-norms
-\citep{zadeh1965,hajek1998}. Modal, many-valued, and probabilistic
-logics add further structure. Attempts to unify these frameworks
-typically embed one system within another or construct meta-logics
-that contain multiple systems as fragments
-\citep{cignoli2000,esteva2001}.
+Six algebraic layers were introduced in \citet{p4} to organise the
+72 semantic primitives of the prime-algebraic neurosymbolic
+bridge~\citep{p1} into a dependency DAG: Boolean ($\{0,1\}$), Fuzzy
+($\{0,+\}$), Ordinal ($\{<,=,>\}$), Modal ($\{\lozenge,\Box\}$),
+Trivalent ($\{-,0,+\}$), and Probabilistic ($\{0,?\}$). Each layer
+has its own formal logic, its own operators, and its own domain of
+application. Yet they remained independent systems.
 
-This paper proposes a different approach. Rather than embedding
-logics within a common language, we show that they arise as
-\emph{dimensional restrictions} of a single four-dimensional
-structure---and that the mechanism distinguishing them is
-\emph{context sensitivity}.
+This paper asks two questions. First: \emph{is there a single
+operator from which all six are recoverable as projections?}
+Second: \emph{what formal logic does that operator support?}
 
-The construction builds on the quaternionic operator
-$\Op=\{0,1,+,\imag{i},\exac{j},\recu{k}\}$ introduced in the
-companion paper \citep{ornelas2026p9}, which associates to each
-concept a four-dimensional coordinate
-$(\rey{r},\imag{i},\exac{j},\recu{k})$ encoding crystallised truth
-($\rey{r}$), potentiality ($\imag{i}$), verification ($\exac{j}$),
-and selection ($\recu{k}$).
+We answer both affirmatively. The operator
+$\Op=\{0,1,+,\imag{i},\exac{j},\recu{k}\}$ assigns to each
+semantic state a point in a four-dimensional unit hypercube, where
+each axis corresponds to an irreducible ontological category:
+crystallised truth ($\rey{r}$), potentiality ($\imag{i}$),
+verifiability ($\exac{j}$), and recursive selection ($\recu{k}$).
+The six algebras are shadows cast by this four-dimensional object
+onto lower-dimensional subspaces. The operator supports a residuated
+lattice equipped with an $\SU$ group action---a structure we call a
+\emph{G-lattice}---in which Boolean logic emerges as the unique
+context-free special case.
 
 \paragraph{Contributions.}
 \begin{enumerate}[nosep]
+\item Construction of a quaternionic operator from which all six
+  algebraic layers are recoverable---four exactly (Boolean,
+  G\"odel fuzzy, G\"odel--Kripke modal, Kleene trivalent) and
+  two interpretively
+  (Sections~\ref{sec:construction}--\ref{sec:recovery}).
+\item Five axioms characterising the fourth axis $\recu{k}$, with
+  a proof of its irreducibility
+  (Sections~\ref{sec:axioms},~\ref{sec:irred}).
 \item A bounded residuated lattice on $[0,1]\times[-1,1]^3$
-  that recovers Boolean and G\"odel fuzzy logic exactly, with
-  interpretive correspondences to four others
+  with exact recovery of four formal logics
   (Section~\ref{sec:lattice}).
 \item A commutation theorem characterising Boolean logic as the
   group-invariant sublattice (Section~\ref{sec:glattice}).
-\item A soundness proof for inference rules across all contexts
-  (Section~\ref{sec:soundness}).
-\item A completeness theorem reducing G-lattice tautologies to
+\item Soundness and completeness, the latter reducing to
   $G^\sim$ (G\"odel logic with involutive negation) via a
-  real-part independence lemma (Section~\ref{sec:completeness}).
-\item A formal argument that the imaginary dimensions are
-  operationally distinguishable, not decoration
-  (Section~\ref{sec:decoration}).
+  real-part independence lemma
+  (Sections~\ref{sec:soundness},~\ref{sec:completeness}).
+\item A cancellative--generative classification of nine algebras
+  of opposition, with formal $\recu{k}$-embed\-dings for all five
+  generative algebras
+  (Section~\ref{sec:split}).
+\item Four diagnosable pathologies as axis collapses, with a
+  liquid zone shown to be open, convex, and path-connected
+  (Section~\ref{sec:pathologies}).
+\item A layer-based embedding of the prime algebra into the
+  G-lattice domain, with a bilateral synthesis theorem
+  characterising strict increase
+  (Section~\ref{sec:embedding}).
+\item A bilattice embedding of Belnap's $\mathbf{FOUR}$ into the
+  G-lattice, preserving both truth and information orders as lattice
+  homomorphisms (Section~\ref{sec:recovery}).
 \item Computational verification of all results at machine precision
   (Section~\ref{sec:computation}).
 \end{enumerate}
@@ -158,16 +247,304 @@ and $\to$ is its residuum satisfying
 $a\otimes b\leq c \iff a\leq b\to c$
 \citep{galatos2007}.
 
-\subsection{The Four Kingdoms}
+%======================================================================
+\section{Construction of the Operator}
+\label{sec:construction}
+%======================================================================
 
-Following \citet{ornelas2026p9}, each axis of the quaternionic
-operator corresponds to an irreducible mode of information:
+The construction proceeds in four steps, each adding one axis that no
+previous combination could capture.
+
+\subsection{Step 1: Recovering Boolean and Fuzzy --- the \texorpdfstring{$\rey{r}$}{r} axis}
+
+The simplest attempt to subsume $\{0,1\}$ and $\{0,+\}$ is to take their
+intersection: $\{0, +\}$, where $+$ abstracts over both $1$ (discrete)
+and the open interval $(0,1)$ (continuous). But this loses information:
+from $\{0,+\}$ one cannot recover which system was in use.
+
+A true unifier must preserve both as special cases:
+\begin{equation}
+\Op_1 = \{0,\; \rey{1},\; \rey{+}\}
+\end{equation}
+where $0$ is absence, $\rey{1}$ is resolved (categorical) presence, and
+$\rey{+}$ is partial (graded) presence. Recovery is immediate:
+\begin{align}
+\text{Boolean} &= \Op_1\big|_{\rey{+}=\varnothing} = \{0, \rey{1}\} \\
+\text{Fuzzy}   &= \Op_1 \text{ with } \rey{+} \in (0,1),\; \rey{1} = \sup
+\end{align}
+
+This defines the first axis: $\rey{r} \in [0,1]$, the degree of
+\emph{crystallised presence}. A concept with $\rey{r}=1$ is fully
+resolved; with $\rey{r}=0.3$, partially so.
+
+\subsection{Step 2: Incorporating modality --- the \texorpdfstring{$\imag{i}$}{i} axis}
+
+The modal algebra $\{\lozenge, \Box\}$ distinguishes possibility from
+necessity. Necessity ($\Box\,p$) maps to $\rey{r}=1$: the concept is
+fully crystallised with no residual potential. But possibility
+($\lozenge\,p$) introduces a genuinely new dimension: something that is
+\emph{neither present nor absent} but \emph{latent}---potential that has
+not yet actualised.
+
+No value of $\rey{r}$ captures this. Adding a second axis:
+\begin{equation}
+\Op_2 = \{0,\; \rey{1},\; \rey{+},\; \imag{i}\}
+\end{equation}
+with the modal correspondence:
+\begin{align}
+\Box\,p   &\longleftrightarrow (\rey{r}=1,\; \imag{i}=0) \\
+\lozenge\,p &\longleftrightarrow (\rey{r} \geq 0,\; \imag{i} > 0)
+\end{align}
+
+Both $\rey{r}$ and $\imag{i}$ admit continuous degrees, yielding a
+\emph{semantic complex plane} where each state is a pair
+$(\rey{r}, \imag{i}) \in [0,1]^2$.
+
+\subsection{Step 3: The polarity axis --- \texorpdfstring{$\exac{j}$}{j}}
+
+The trivalent algebra $\{-,0,+\}$ introduces \emph{polarity}: not just
+presence or absence, but \emph{direction}. This is irreducible to
+$\rey{r}$ (which has no sign) and to $\imag{i}$ (which has no
+directionality).
+
+\begin{equation}
+\Op_3 = \{0,\; \rey{1},\; \rey{+},\; \imag{i},\; \exac{j}\}
+\end{equation}
+
+The $\exac{j}$ axis captures the degree of \emph{verifiability and
+directional comparability}. It subsumes the ordinal algebra
+$\{<,=,>\}$, which are relational operators that become possible only
+when a measurement axis exists.
+
+\subsection{Step 4: Recursive selection --- the \texorpdfstring{$\recu{k}$}{k} axis}
+
+Three axes generate a static space: concepts have crystallisation,
+potentiality, and directionality, but nothing \emph{moves}. The system
+cannot prune, cannot advance, cannot select.
+
+The probabilistic algebra $\{0,?\}$ of Layer~6 (Observer) hints at this
+missing dimension. The ``$?$'' is not mere uncertainty---it is the state
+of a system that \emph{looks at itself} and does not yet know what it
+will find. This self-referential act---observation as recursive
+selection---is irreducible to the other three axes.
+
+The complete operator is:
+\begin{equation}
+\boxed{\;
+\Op = \{0,\; \rey{1},\; \rey{+},\; \imag{i},\; \exac{j},\; \recu{k}\}
+\;}
+\end{equation}
+where every semantic state lives in:
+\begin{equation}
+s = (\rey{r},\; \imag{i},\; \exac{j},\; \recu{k}) \in [0,1]^4
+\end{equation}
+
+The $\recu{k}$ axis measures the degree of \emph{recursive selection}:
+how much a system prunes itself, rotates its perspective, and advances
+irreversibly toward higher complexity. The four axes are irreducible:
+no subset of three can generate the fourth. This mirrors the algebraic
+structure of the quaternions $\mathbb{H}$, where $\{1,i,j,k\}$ are
+the four basis elements and no three suffice to span the algebra. A
+formal proof is given in Section~\ref{sec:irred}.
+
+%======================================================================
+\section{Axioms for Recursive Selection}
+\label{sec:axioms}
+%======================================================================
+
+We propose five axioms that characterise $\recu{k}$.
+
+\begin{axiombox}[Axiom K1 --- Range]
+\begin{axiom}[Range]\label{ax:range}
+$\recu{k} \in [0,1]$ for every semantic state. The value $k=0$
+represents the complete absence of selection; $k=1$ represents maximal
+selective activity.
+\end{axiom}
+\end{axiombox}
+
+This is a structural axiom ensuring $\recu{k}$ lives in the same
+bounded interval as the other axes, consistent with the hypercube
+$H = [0,1]^4$.
+
+\begin{axiombox}[Axiom K2 --- Stagnation Existence]
+\begin{axiom}[Stagnation existence]\label{ax:stag}
+The \emph{stagnation hyperplane}
+\[
+  \mathcal{S} = \{(r,i,j,0) \in H : r > 0,\; i > 0,\; j > 0\}
+\]
+is inhabited. That is, there exist semantic states with all three of
+crystallisation, potentiality, and verifiability active, yet with zero
+recursive selection.
+\end{axiom}
+\end{axiombox}
+
+\noindent\textbf{Empirical grounding.} Consider Kodak in 1975: the
+company had crystallised knowledge of photography ($\rey{r} > 0$),
+imagined digital photography and built prototypes ($\imag{i} > 0$),
+and verified feasibility with working systems ($\exac{j} > 0$)---yet
+its membrane sealed and no selection occurred ($\recu{k} = 0$). The
+company stagnated and eventually perished from conceptual heat death.
+
+\begin{axiombox}[Axiom K3 --- Generation]
+\begin{axiom}[Generation]\label{ax:gen}
+The interaction of potentiality and verifiability \emph{enables} but
+does not \emph{determine} selection:
+\[
+  \imag{i} > 0 \;\wedge\; \exac{j} > 0 \quad\Longrightarrow\quad
+  \recu{k} \;\text{can be activated},
+\]
+but there exist states with $\imag{i} > 0$, $\exac{j} > 0$, and
+$\recu{k} = 0$.
+\end{axiom}
+\end{axiombox}
+
+This axiom formalises the quaternionic relation $\imag{i}\exac{j} =
+\recu{k}$ as an \emph{enabling} relation rather than a deterministic
+one. In standard quaternion algebra, $ij = k$ is an identity. Here, it
+states that having both potentiality and verifiability is a
+\emph{necessary precondition} for selection, but not sufficient---a
+system may have both and still fail to select (Axiom~\ref{ax:stag}).
+
+\begin{axiombox}[Axiom K4 --- Self-Inversion]
+\begin{axiom}[Self-inversion]\label{ax:inv}
+Recursive selection applied to itself produces inversion. In the
+quaternion algebra $\mathbb{H}$, the basis element $k$ satisfies
+$k^2=-1$: left-multiplication by $k$ twice reverses orientation.
+\end{axiom}
+\end{axiombox}
+
+\noindent\textbf{Scope and domain.} K4 is a statement about the
+algebraic structure of $\mathbb{H}$, not about the semantic
+hypercube $H=[0,1]^4$: the map $-\mathrm{Id}:a\mapsto -a$ sends
+$H$ outside itself (e.g., $-(0.5,0.3,0.2,0.1)\notin[0,1]^4$).
+K4 therefore lives in $\mathbb{H}$ and constrains the
+\emph{algebraic substrate} that the semantic axes mirror, not the
+bounded domain of truth values.
+
+\smallskip
+\noindent\textbf{Left-multiplication vs.\ conjugation.}
+The G-lattice (Section~\ref{sec:glattice}) uses conjugation
+$q\cdot a=qa\bar{q}$, not left-multiplication $a\mapsto ka$.
+These are distinct actions with different iteration behaviour:
 \begin{itemize}[nosep]
-\item $\rey{r}$: what crystallises, fixes, defines (resolved truth),
-\item $\imag{i}$: what flows, invents, projects (potentiality),
-\item $\exac{j}$: what measures, compares, orders (verification),
-\item $\recu{k}$: what selects, prunes, advances (recursion).
+\item \emph{Left-multiplication:} $(a\mapsto ka)\circ(a\mapsto ka)
+  = (a\mapsto k^2 a) = (a\mapsto -a)$. Self-inversion.
+\item \emph{Conjugation:} $(a\mapsto ka\bar{k})\circ
+  (a\mapsto ka\bar{k}) = (a\mapsto k^2 a\bar{k}^2)
+  = (a\mapsto(-1)a(-1)) = (a\mapsto a)$. Identity.
 \end{itemize}
+K4 captures the left-multiplication structure; the G-lattice
+action captures the conjugation structure. This duality is not
+an artefact of our construction: it is the standard distinction
+in Clifford algebra $\mathrm{Cl}(0,2)\cong\mathbb{H}$ between
+the left regular representation (spinor transformation) and the
+twisted adjoint representation (vector
+rotation)~\citep{lounesto2001,porteous1995}.
+In the Clifford framework, $\mathbb{H}$ as an
+$(\mathbb{H},\mathbb{H})$-bimodule encodes both actions: left
+multiplication is the left module structure, and conjugation arises
+from the bimodule structure via the canonical anti-involution.
+The two actions coexist as structural features of the same algebra;
+neither is derivable from the other.
+
+\smallskip
+\noindent\textbf{Semantic reading.} A system that selects
+\emph{only which selections to make}---recursion without base
+case---enters infinite regress and inverts. This is the algebraic
+signature of Hofstadter's strange
+loop~\citep{hofstadter1979}: self-reference that, taken to its
+logical conclusion, flips the system.
+Remark~\ref{rem:sign} below discusses how this quaternionic form
+relates to the weaker involutive form found in categorical
+realisations of $\recu{k}$.
+
+\begin{axiombox}[Axiom K5 --- Activation Threshold]
+\begin{axiom}[Activation threshold]\label{ax:thresh}
+There exists a measurable function $\tau: (0,1]^3 \to [0,1]$ such
+that the transition from $\recu{k} = 0$ to $\recu{k} > 0$ occurs when
+the system's state $(\rey{r}, \imag{i}, \exac{j})$ crosses a critical
+surface:
+\[
+  \recu{k} \;\text{activates when}\; \Psi(r, i, j) \geq \tau(r, i, j),
+\]
+where $\Psi$ is a system-dependent potential function.
+\end{axiom}
+\end{axiombox}
+
+K5 is intentionally the weakest axiom: it postulates the
+\emph{existence} of a threshold without specifying its form.
+This generality is deliberate---different substrates have different
+activation dynamics, and any stronger constraint (e.g., requiring
+$\tau$ to be continuous, monotone, or given by a specific formula)
+would restrict the framework to a particular substrate class.
+The axiom is not vacuous: it constrains $\recu{k}$-activation to
+depend on a \emph{deterministic} surface in $(r,i,j)$-space,
+excluding stochastic or history-dependent activation. It is
+non-trivially satisfiable: any continuous $\Psi$ with
+$\Psi(r,i,j)=rij$ and any constant $\tau_0\in(0,1)$ produce a
+concrete threshold surface $rij=\tau_0$.
+
+\begin{remark}[Mutual consistency]
+The five axioms are mutually consistent: K1 bounds $k$; K2 guarantees
+stagnation exists; K3 says $i$ and $j$ enable but don't force $k$; K4
+characterises pure $k$'s self-action; K5 says activation has a
+threshold. No pair contradicts another, and K2's second clause is
+implied by K3's second clause (making K2 the stronger existential
+statement while K3 is the structural one).
+\end{remark}
+
+%======================================================================
+\section{The Four Kingdoms}
+\label{sec:kingdoms}
+%======================================================================
+
+Each axis corresponds to an ontological kingdom---an irreducible mode in
+which information can exist.
+
+\begin{reinoR}
+What crystallises, fixes, defines. A concept with $\rey{r}=1$ is
+categorical: triangle, prime number, conservation law. It has found its
+form and holds it. The degree of resolved presence.
+\emph{Ice.}
+\end{reinoR}
+
+\begin{reinoI}
+What flows, invents, projects. A concept with $\imag{i}=1$ is pure
+potentiality: the ``what if\ldots?'' that has not yet crystallised.
+It is real, vivid, potent---but without form.
+\emph{Plasma.}
+\end{reinoI}
+
+\begin{reinoJ}
+What measures, compares, orders. A concept with $\exac{j}=1$ is fully
+verifiable: the demonstration, the experiment, the measurement that
+closes with \textit{Q.E.D.} and admits no debate. The scale without
+temperature.
+\emph{The thermometer.}
+\end{reinoJ}
+
+\begin{reinoK}
+What selects, prunes, rotates, and advances. A concept with $\recu{k}=1$
+is maximally recursive: it observes itself, discards what does not work,
+and irreversibly increases complexity. It is the engine of evolution, the
+phase transition, the moment where the system reorganises.
+\emph{The spin.}
+\end{reinoK}
+
+\bigskip
+
+\noindent
+The four kingdoms are to information what the four fundamental forces are
+to physics: irreducible, complementary, and jointly exhaustive. No
+kingdom can be derived from the other three.
+
+The state-of-matter metaphors---\emph{ice} for $\rey{r}$, \emph{plasma}
+for $\imag{i}$, \emph{thermometer} for $\exac{j}$, \emph{spin} for
+$\recu{k}$---are offered as \emph{mnemonic}, not definitional: they are
+meant to make the ontological content easier to remember, not to ground
+it. The definitional content is carried by the axioms of
+Section~\ref{sec:axioms} and the construction of
+Section~\ref{sec:construction}, not by the metaphors.
 
 %======================================================================
 \section{The Lattice of Connectives}
@@ -236,7 +613,34 @@ The expanded structure is a residuated lattice with involutive
 negation in the sense of \citet{esteva2000}.
 \end{remark}
 
-\subsection{Specialisations}
+\begin{remark}[Product structure of the lattice]
+\label{rem:product}
+The lattice $(V,\mathrm{AND},\mathrm{OR},\to,\mathrm{NOT})$ is
+isomorphic to the product of four independent chains:
+$([0,1],\min,\max,\to_G,1{-}x)\times([-1,1],\min,\max,\to_G',{-}x)^3$.
+In particular, the connectives do not couple the four components.
+The quaternionic structure of the framework manifests not in the
+lattice connectives but in two other places: (i)~the $\SU$ group
+action (Section~\ref{sec:glattice}), which couples the imaginary
+components via non-abelian rotation, and (ii)~the quaternionic
+product on $S^3$ (Section~\ref{sec:quaternion}), which couples
+all four components via Hamilton multiplication. A non-product
+residuated lattice whose monoidal operation uses quaternion
+multiplication directly is not available: quaternion multiplication
+is not commutative, not idempotent, and does not preserve
+$[0,1]^4$. The construction of a non-commutative residuated lattice
+on $V$ using a quaternion-derived t-norm faces deep obstructions:
+six families of lattice orders are incompatible with the Hamilton
+product, and at most two of \{associativity, non-commutativity,
+compatible lattice order\} can coexist on $V$---a theorem, not a
+conjecture, proved via angular accumulation of iterated
+products~\citep{p11_1}.
+\end{remark}
+
+%======================================================================
+\section{Recovery of Formal Systems}
+\label{sec:recovery}
+%======================================================================
 
 \begin{theorem}[Exact recovery]
 \label{thm:recovery}
@@ -257,24 +661,197 @@ $[0,1]$ with the standard G\"odel connectives
 \citep{hajek1998}. Both are isomorphisms, not merely embeddings.
 \end{proof}
 
-\begin{remark}[Interpretive correspondences]
-\label{rem:interpretive}
-Four additional logics admit \emph{interpretive correspondences}
-(not formal isomorphisms) under dimensional restriction:
+\subsection{Unified table of the six layers}
+
+The six algebraic layers introduced in \citet{p4} are projections
+of the operator $\Op$:
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\caption{Six algebraic layers as projections of $\Op$.}
+\label{tab:unified}
+\begin{tabularx}{\textwidth}{@{}cl >{\raggedright}p{2cm} >{\raggedright}p{3cm} >{\raggedright\arraybackslash}p{4cm}@{}}
+\toprule
+\textbf{Layer} & \textbf{Name} & \textbf{Original algebra} &
+\textbf{Unified operator} & \textbf{Active axes} \\
+\midrule
+1 & Point    & $\{0, 1\}$           & $\{0,\; \rey{1}\}$
+  & $\rey{r}$ discrete \\
+2 & Line     & $\{0, +\}$           & $\{0,\; \rey{+}\}$
+  & $\rey{r}$ continuous \\
+3 & Time     & $\{<, =, >\}$        & $\{\exac{<},\; \exac{=},\; \exac{>}\}$
+  & $\exac{j}$ pure \\
+4 & Plane    & $\{\lozenge, \Box\}$ & $\{\imag{i},\; \rey{1}\}$
+  & $\rey{r} \times \imag{i}$ \\
+5 & Volume   & $\{-, 0, +\}$        & $\{\exac{-j},\; 0,\; \exac{+j}\}$
+  & $\exac{j^{\pm}}$ (polarity) \\
+6 & Observer & $\{0, ?\}$           & $\{0,\;\rey{r}\imag{i}\exac{j}\recu{k}\}$
+  & $\rey{r} \times \imag{i} \times \exac{j} \times \recu{k}$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent
+The layers progressively activate axes: the first two operate on
+$\rey{r}$ alone (presence), the middle layers activate one or two
+additional axes ($\imag{i}$, $\exac{j}$), and Layer~6 (Observer) is
+the only one inhabiting all four dimensions simultaneously. Layers
+1--5 set $\recu{k}=0$ (they predate selection).
+
+\begin{theorem}[Modal and trivalent recovery]
+\label{thm:modal_trivalent}
+Under dimensional restrictions, two further logics are exactly
+recoverable:
 \begin{enumerate}[nosep,start=3]
-\item \textbf{Modal}: $j=k=0$, $r,i\in[0,1]$, reading
-  necessity as $r=i=1$ and possibility as $r>0\lor i>0$.
-\item \textbf{Trivalent}: $i=k=0$, $j\in\{-1,0,+1\}$,
-  encoding the third value via the sign of $j$.
+\item \textbf{Modal (G\"odel--Kripke)}: Restrict to $j=k=0$,
+  $r,i\in[0,1]$, and equip the G\"odel restriction with Kripke
+  frames valued in $[0,1]$, reading $\Box\varphi$ as the infimum
+  of $\varphi$ over accessible worlds and $\lozenge\varphi$ as
+  the supremum. Then the $\{0,1\}$-subalgebra recovers classical
+  modal logic exactly. Completeness of G\"odel modal logics
+  (including S4 and S5 at the Boolean restriction) is established
+  by \citet{caicedo2010}; the general construction for residuated
+  lattices is due to \citet{bou2011} and \citet{fitting1991}.
+\item \textbf{Trivalent (Kleene)}: Restrict to $i=k=0$,
+  $j\in\{-1,0,+1\}$. The connectives $\min$, $\max$, and
+  $-j$ on the three-element chain $\{-1,0,+1\}$ are exactly
+  the strong Kleene truth tables (with the identification
+  $-1=\mathrm{false}$, $0=\mathrm{unknown}$,
+  $+1=\mathrm{true}$). The restriction is closed under all three
+  operations and constitutes an isomorphism, not an
+  approximation. More generally, {\L}ukasiewicz $n$-valued logic
+  is exactly the $n$-element subalgebra of the standard
+  MV-algebra on $[0,1]$~\citep{cignoli2000}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{(3) Modal.} The G\"odel chain $([0,1],\min,\max,\to_G)$ is
+a Heyting algebra and hence admits Kripke semantics. By
+\citet{caicedo2010}, Theorem~3.8, the standard G\"odel modal logic
+over $[0,1]$ is complete with respect to Kripke frames with
+$[0,1]$-valued accessibility. When the valuation is restricted to
+$\{0,1\}$, the accessibility relation becomes crisp, the G\"odel
+residuum becomes material implication, and the resulting logic is
+classical modal logic (K, S4, or S5 depending on frame conditions).
+
+\emph{(4) Trivalent.} On $\{-1,0,+1\}$ with the natural order
+$-1<0<+1$: $\min$ is Kleene conjunction, $\max$ is Kleene
+disjunction, and $x\mapsto -x$ is Kleene negation. These are
+exactly the strong Kleene truth tables. The subset is closed under
+all three operations (trivially: $\min$, $\max$, and negation of
+elements of $\{-1,0,+1\}$ remain in $\{-1,0,+1\}$). This gives
+an isomorphism between the restricted sublattice and
+$\mathrm{K}_3$.
+\end{proof}
+
+\begin{remark}[Remaining interpretive correspondences]
+\label{rem:interpretive}
+Two layers remain as interpretive correspondences rather than
+exact isomorphisms:
+\begin{enumerate}[nosep,start=5]
 \item \textbf{Ordinal}: $j=k=0$, $i$ encoding rank.
 \item \textbf{Probabilistic}: $j=k=0$, $i$ encoding variance.
 \end{enumerate}
-These are suggestive readings of the restricted subspaces, not
-claims that a modal or probabilistic logician would recognise
-their formal system. The value of the quaternionic lattice rests
-on the exact recovery of Boolean and G\"odel logic and the
-commutation theorem (Theorem~\ref{thm:commutation}), not on
-these looser analogies.
+These are suggestive readings of the restricted subspaces. Ordinal
+and probabilistic logics have richer structure (well-orders,
+$\sigma$-algebras) than the quaternionic restriction provides.
+\end{remark}
+
+\subsection{Belnap--Dunn bilattice embedding}
+
+Belnap's four-valued logic~\citep{belnap1977} uses the bilattice
+$\mathbf{FOUR} = \{\bot, \mathbf{f}, \mathbf{t}, \top\}$ with two
+independent lattice orders: a \emph{truth} order
+($\mathbf{f} \leq_t \bot \leq_t \mathbf{t}$,
+$\mathbf{f} \leq_t \top \leq_t \mathbf{t}$, with $\bot$ and $\top$
+incomparable) and an \emph{information} order
+($\bot \leq_i \mathbf{f} \leq_i \top$,
+$\bot \leq_i \mathbf{t} \leq_i \top$, with $\mathbf{f}$ and
+$\mathbf{t}$ incomparable).
+
+\begin{theorem}[Bilattice embedding]
+\label{thm:belnap}
+$\mathbf{FOUR}$ embeds into $V = [0,1] \times [-1,1]^3$ as a
+simultaneous lattice homomorphism for both orders. Specifically,
+there exists $\varphi: \mathbf{FOUR} \to V$ such that:
+\begin{enumerate}[nosep]
+  \item $\varphi$ preserves the truth order as the component-wise
+    order on $V$: $a \leq_t b$ iff $\varphi(a) \leq_{\mathrm{cw}}
+    \varphi(b)$.
+  \item $\varphi$ preserves the information order as the
+    component-wise order on absolute imaginary magnitudes:
+    $a \leq_i b$ iff $|\mathrm{Im}(\varphi(a))| \leq_{\mathrm{cw}}
+    |\mathrm{Im}(\varphi(b))|$.
+  \item Both truth and information lattice operations (meet and join)
+    are preserved.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Choose parameters $r_0 < r_1$ in $[0,1]$, $\, s < 0 < t$ in
+$[-1,1]$ with $|s| > t$, and $0 < d$ in $[0,1]$. Define:
+\begin{align*}
+\varphi(\bot) &= (r_0,\; t,\; 0,\; 0), &
+\varphi(\mathbf{f}) &= (r_0,\; s,\; 0,\; 0), \\
+\varphi(\mathbf{t}) &= (r_1,\; t,\; d,\; 0), &
+\varphi(\top) &= (r_1,\; s,\; d,\; 0).
+\end{align*}
+The construction assigns each coordinate to either case~(A)
+($\bot_x = \mathbf{f}_x$, $\top_x = \mathbf{t}_x$) or case~(B)
+($\bot_x = \mathbf{t}_x$, $\top_x = \mathbf{f}_x$):
+\emph{$r$}~takes case~(A), \emph{$i$}~takes case~(B), and
+\emph{$j$}~takes case~(A).
+
+\smallskip
+\emph{(1) Truth order.} Since $s < t$ and $r_0 < r_1$, the
+component-wise relations are:
+$\varphi(\mathbf{f}) \leq \varphi(\bot)$ (only $i$ changes:
+$s \leq t$),
+$\varphi(\bot) \leq \varphi(\mathbf{t})$ ($r_0 \leq r_1$,
+$0 \leq d$), and similarly for $\varphi(\mathbf{f}) \leq
+\varphi(\top) \leq \varphi(\mathbf{t})$. For incomparability of
+$\bot$ and $\top$: coordinate $i$ gives $t > s$ ($\bot$ higher)
+while $r$ gives $r_0 < r_1$ ($\top$ higher).
+
+\smallskip
+\emph{(2) Information order.} The absolute imaginary magnitudes
+are $|\mathrm{Im}(\varphi(\bot))| = (t, 0)$,
+$|\mathrm{Im}(\varphi(\mathbf{f}))| = (|s|, 0)$,
+$|\mathrm{Im}(\varphi(\mathbf{t}))| = (t, d)$,
+$|\mathrm{Im}(\varphi(\top))| = (|s|, d)$.
+Since $|s| > t > 0$ and $d > 0$: $\bot$ has the smallest
+magnitudes, $\top$ the largest, and $\mathbf{f}$ (large $|i|$,
+no $|j|$) is incomparable with $\mathbf{t}$ (small $|i|$,
+large $|j|$).
+
+\smallskip
+\emph{(3) Lattice operations.} By construction,
+$\max_{\mathrm{cw}}(\varphi(\bot), \varphi(\top)) =
+(r_1, t, d, 0) = \varphi(\mathbf{t})$ and
+$\min_{\mathrm{cw}}(\varphi(\bot), \varphi(\top)) =
+(r_0, s, 0, 0) = \varphi(\mathbf{f})$, matching the truth lattice.
+Similarly,
+$\max_{|\mathrm{Im}|}(\varphi(\mathbf{f}), \varphi(\mathbf{t})) =
+(|s|, d) = |\mathrm{Im}(\varphi(\top))|$ and
+$\min_{|\mathrm{Im}|}(\varphi(\mathbf{f}), \varphi(\mathbf{t})) =
+(t, 0) = |\mathrm{Im}(\varphi(\bot))|$, matching the information
+lattice.
+\end{proof}
+
+\begin{remark}[Sign-magnitude decoupling]
+\label{rem:belnap-decoupling}
+The embedding exploits the sign degree of freedom in the imaginary
+components: a \emph{negative} imaginary coordinate is \emph{below}
+its positive counterpart in component-wise (truth) order, but its
+\emph{absolute value} is \emph{above}---decoupling truth from
+information. This is the algebraic mechanism by which the G-lattice
+accommodates two independent orders on the same space. In Belnap's
+semantics, $\mathbf{f}$ and $\mathbf{t}$ carry equal information
+($|\mathrm{Im}|$ concentrated on different axes) but opposite truth;
+$\bot$ carries minimal information while $\top$ carries maximal
+information, both at neutral truth.
 \end{remark}
 
 %======================================================================
@@ -321,17 +898,63 @@ Property (4): $q(ab)\bar{q}=(qa\bar{q})(qb\bar{q})$ by
 associativity and $\bar{q}q=1$.
 \end{proof}
 
-\begin{remark}[Domain of the action]
+\begin{proposition}[Non-closure of the action on $V$]
+\label{prop:nonclosure}
+The conjugation action is not closed on $V=[0,1]\times[-1,1]^3$.
+That is, there exist $a\in V$ and $q\in\SU$ such that
+$q\cdot a\notin V$.
+\end{proposition}
+
+\begin{proof}
+Let $a=(0.5,\;1,\;1,\;0)\in V$. Then
+$\|\Imag(a)\|=\sqrt{1^2+1^2+0^2}=\sqrt{2}$.
+Conjugation acts on $\Imag(a)$ as an $\mathrm{SO}(3)$ rotation
+preserving $\|\Imag\|=\sqrt{2}$. Choose $q\in\SU$ corresponding
+to the $\mathrm{SO}(3)$ rotation that maps $(1,1,0)$ to
+$(0,0,\sqrt{2})$. Then $q\cdot a=(0.5,\;0,\;0,\;\sqrt{2})$.
+Since $\sqrt{2}>1$, the $\recu{k}$-component exceeds $[-1,1]$,
+so $q\cdot a\notin V$.
+\end{proof}
+
+\begin{proposition}[No domain is simultaneously closed under
+connectives and the group action]
+\label{prop:no_joint_domain}
+There is no subset $D\subseteq[0,1]\times\mathbb{R}^3$ that is
+simultaneously closed under $\mathrm{OR}$ (component-wise max)
+and under $\SU$ conjugation, unless $D$ is contained in
+$\{a:\Imag(a)=0\}$.
+\end{proposition}
+
+\begin{proof}
+Suppose $D$ is closed under both operations and contains some
+$a$ with $\Imag(a)\neq0$. By $\SU$-closure, $D$ contains all
+rotations of $\Imag(a)$; in particular, it contains elements
+$a_1,a_2$ with $\Real(a_1)=\Real(a_2)$ and disjoint support in
+the imaginary components (e.g., $a_1=(r,\alpha,0,0)$ and
+$a_2=(r,0,\alpha,0)$ for $\alpha=\|\Imag(a)\|>0$). Then
+$\mathrm{OR}(a_1,a_2)=(r,\alpha,\alpha,0)$ with
+$\|\Imag\|=\alpha\sqrt{2}>\alpha$. Iterating: $\mathrm{OR}$
+with a third rotation gives $\|\Imag\|=\alpha\sqrt{3}$, and
+further rotations and ORs produce arbitrarily large
+$\|\Imag\|$. Hence $D$ is unbounded in the imaginary
+components, contradicting any finite bound. The only escape is
+$\alpha=0$, i.e., $\Imag(a)=0$.
+\end{proof}
+
+\begin{remark}[Domain separation]
 \label{rem:domain}
-Conjugation acts on $\Imag(a)$ as an $\mathrm{SO}(3)$ rotation,
-preserving $\|\Imag\|$ but potentially redistributing components
-beyond $[-1,1]$ when $\|\Imag(a)\|>1$. The action is therefore
-defined on the ambient space $[0,1]\times\mathbb{R}^3\supseteq V$.
-Every purely real element $(r,0,0,0)$ is a fixed point, so the
-Boolean sublattice ($\Imag=0$) is always preserved. The logical
-content of the G-lattice depends only on $\Real$ (by
-Lemma~\ref{lem:re-indep}), so the domain extension does not
-affect tautologies or derivability.
+Propositions~\ref{prop:nonclosure} and~\ref{prop:no_joint_domain}
+establish that the lattice and the group action necessarily live on
+different domains: the lattice on $V=[0,1]\times[-1,1]^3$, the
+group action on the ambient space
+$W=[0,1]\times\mathbb{R}^3\supseteq V$. This is not a deficiency
+but a structural fact: the lattice connectives (min, max, G\"odel
+residuum, involutive negation) extend naturally to $W$, and the
+real-part independence lemma (Lemma~\ref{lem:re-indep}) holds
+identically on $W$. Therefore all logical results---tautologies,
+soundness, completeness, and the commutation theorem---are
+unaffected by the domain extension. The two structures interact
+through $\Real$, which both preserve.
 \end{remark}
 
 \begin{theorem}[Commutation theorem]
@@ -527,6 +1150,643 @@ and the cause--effect chains.
 \end{remark}
 
 %======================================================================
+\section{Irreducibility of \texorpdfstring{$\recu{k}$}{k}}
+\label{sec:irred}
+%======================================================================
+
+We first establish a key structural property.
+
+\begin{proposition}[Non-injectivity of projection]
+\label{prop:noninj}
+The projection $\pi: H \to [0,1]^3$ defined by $\pi(r,i,j,k) =
+(r,i,j)$ is not injective on the inhabited region of~$H$. That is,
+there exist states $s_0, s_1 \in H$ with $\pi(s_0) = \pi(s_1)$ and
+$s_0 \neq s_1$.
+\end{proposition}
+
+\begin{proof}
+By Axiom~\ref{ax:stag} (K2), there exists a stagnation state $s_0 =
+(r_0, i_0, j_0, 0)$ with $r_0, i_0, j_0 > 0$. The liquid-zone state
+$s_1 = (r_0, i_0, j_0, k_1)$ with any $k_1 > 0$ also lies in $H$
+(since $[0,1]^4$ contains all such points). Both states project to
+$(r_0, i_0, j_0)$ under $\pi$, but $s_0 \neq s_1$ since their
+$\recu{k}$-components differ.
+\end{proof}
+
+\begin{theorem}[Irreducibility of $\recu{k}$]
+\label{thm:irred}
+There exists no function $f: [0,1]^3 \to [0,1]$ such that
+$k = f(r, i, j)$ for all semantic states $(r, i, j, k) \in H$.
+\end{theorem}
+
+\begin{proof}
+Suppose, for contradiction, that such a function $f$ exists. Let
+$s_0 = (r_0, i_0, j_0, 0) \in \mathcal{S}$ be a stagnation state
+(exists by Axiom~\ref{ax:stag}). Then $f(r_0, i_0, j_0) = 0$.
+
+Now consider the state $s_1 = (r_0, i_0, j_0, k_1)$ with $k_1 > 0$
+(which exists in $H$ by Proposition~\ref{prop:noninj}). Since $f$
+determines $k$ from $(r,i,j)$, we must have $f(r_0, i_0, j_0) = k_1 >
+0$.
+
+But $f(r_0, i_0, j_0) = 0$ (from $s_0$) and $f(r_0, i_0, j_0) = k_1
+> 0$ (from $s_1$) is a contradiction, since $f$ is a function and must
+assign a unique value to each input. Therefore no such $f$ exists.
+\end{proof}
+
+\begin{corollary}
+\label{cor:independence}
+The four axes $(\rey{r}, \imag{i}, \exac{j}, \recu{k})$ are
+algebraically independent in the sense that no axis can be expressed as
+a function of the remaining three.
+\end{corollary}
+
+\begin{proof}
+The irreducibility of $\recu{k}$ with respect to $(\rey{r}, \imag{i},
+\exac{j})$ is Theorem~\ref{thm:irred}. The irreducibility of each of
+$\rey{r}$, $\imag{i}$, $\exac{j}$ with respect to the other three
+follows by an identical argument using the corresponding pathologies:
+dogma ($\imag{i} = 0$ with $r, j, k > 0$), delirium ($\rey{r} = 0$
+with $i, j, k > 0$), and pseudoscience ($\exac{j} = 0$ with $r, i, k
+> 0$). Each pathology provides a state where one axis is zero while
+the others are positive, and the liquid zone provides states where all
+four are positive with the same values on the three non-zero axes.
+\end{proof}
+
+\begin{remark}[Strength of the proof]
+The proof requires only Axiom K2 (stagnation existence) and the
+geometric fact that the hypercube $[0,1]^4$ contains both stagnation
+and liquid-zone states sharing the same $(r,i,j)$ projection. No
+dynamical assumptions, no quaternionic structure, and no threshold
+mechanism are needed.
+\end{remark}
+
+%======================================================================
+\section{The Cancellative--Generative Classification}
+\label{sec:split}
+%======================================================================
+
+Nine algebraic structures of opposition arise naturally in the
+prime-algebraic framework. We classify them according to whether they
+require $\recu{k}$.
+
+\begin{definition}[Cancellative and generative algebras]
+An algebra of opposition is \emph{cancellative} if combining an
+element with its opposite produces a neutral element (zero, one, or
+identity matrix). It is \emph{generative} if the combination produces
+structure that did not exist in either operand.
+\end{definition}
+
+\begin{theorem}[Cancellative--generative classification]
+\label{thm:split}
+The nine algebras of opposition split into two classes:
+
+\smallskip
+\noindent\textbf{Cancellative} (operate within $(\rey{r}, \imag{i}, \exac{j})$, do not require $\recu{k}$):
+\begin{enumerate}[nosep]
+  \item Additive inverse: $a + (-a) = 0$
+  \item Multiplicative inverse: $a \cdot (1/a) = 1$
+  \item Cyclic group $\mathbb{Z}/n\mathbb{Z}$: $a + (n-a) \equiv 0$
+  \item Rotation $\mathrm{SO}(2)$: $R(\theta) \cdot R(-\theta) = I$
+\end{enumerate}
+
+\smallskip
+\noindent\textbf{Generative} (require $\recu{k}$):
+\begin{enumerate}[nosep, start=5]
+  \item Categorical duality: $(-)^{\mathrm{op}}$ reverses all arrows
+  \item Kernel/Image: $\dim(\ker f) + \dim(\mathrm{im}\, f) = \dim V$
+  \item Eigenvalue spectrum: $Av = \lambda v$ classifies modes
+  \item Brouwer fixed point: $\exists\, x^*: f(x^*) = x^*$
+  \item Homology/Betti numbers: structure of absence
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\textbf{Cancellative algebras (1--4).} Each has the form $a \ast
+a^{-1} = e$ where $e$ is an identity element and $\ast$ is the group
+operation. This is formally verifiable: given $a$, the result $e$ is
+uniquely determined by the group axioms---no selection is needed.
+These algebras operate by producing a neutral element, which is a
+fixed point of the operation. They model opposition that
+\emph{annihilates}: wave plus anti-wave yields silence, credit plus
+debt yields zero. All four are expressible entirely in terms of the
+content axes $(\rey{r}, \imag{i}, \exac{j})$: additive inverse
+operates on $\rey{r}$ (cancellation of crystallised content),
+multiplicative inverse on $\exac{j}$ (normalisation of measurement),
+cyclic return on $\imag{i}$ (return of potentiality), and rotation on
+the $(\rey{r}, \imag{i})$ plane (phase shift without selection).
+
+\textbf{Generative algebras (5--9).}
+The classification criterion for the generative class is the
+shared structural property: each involves a
+\emph{meta-operation}---an operation that acts on the structure
+of a system rather than within it.
+Theorems~\ref{thm:catdual}--\ref{thm:homology} below prove
+individually that each algebra's characteristic operation satisfies
+the three defining properties of $\recu{k}$: (a)~meta-operation
+on structure, (b)~generative, and (c)~self-inverting.
+
+\emph{(5) Categorical duality} reverses \emph{all} arrows of a
+diagram simultaneously---a global structural transformation, not a
+local computation. It produces ``free theorems'': any result about
+products has a dual about coproducts. This requires operating
+\emph{on} the structure of $(r,i,j)$, not \emph{within} it.
+
+\emph{(6) Kernel/Image} detects what a transformation
+\emph{destroyed} versus what it \emph{created}. This is a
+meta-diagnostic: the system auditing its own information loss.
+
+\emph{(7) Eigenvalue spectrum} classifies the \emph{modes} of action
+($\lambda > 0$: expansion, $\lambda < 0$: reflection, $\lambda \in
+\mathbb{C}$: oscillation, $\lambda = 0$: annihilation). Classifying
+modes requires observing the system's own dynamics from outside.
+
+\emph{(8) Brouwer fixed point} guarantees existence of a point the
+transformation does not move---the system's own point of stillness.
+Finding it requires \emph{searching} the space, a selective operation.
+
+\emph{(9) Homology} quantifies the \emph{structure of absence} (how
+many holes of each dimension). Detecting what is \emph{missing}
+requires meta-knowledge about the system's own topology.
+
+The common pattern is that each generative algebra requires the
+system to operate on its own structure, audit its own losses,
+classify its own modes, search its own space, or detect its own
+absences---operations characterised by $\recu{k}$ (recursive
+selection). A system with $k = 0$ (stagnation) cannot perform any
+of them, because the content axes $(\rey{r}, \imag{i}, \exac{j})$
+encode \emph{what is known}, not the capacity to interrogate what
+is known.
+\end{proof}
+
+\begin{theorem}[Categorical duality as $\recu{k}$]
+\label{thm:catdual}
+The opposition functor $(-)^{\mathrm{op}}: \mathbf{Cat} \to
+\mathbf{Cat}^{\mathrm{op}}$ is the structural realisation of
+$\recu{k}$ in the category of categories. Specifically:
+\begin{enumerate}[nosep]
+  \item It is a meta-operation on structure (operates on morphisms, not objects)---matching $\recu{k}$'s role as the axis that acts on the other axes.
+  \item It generates without cancelling (no neutral element is produced)---matching the generative character.
+  \item $(-)^{\mathrm{op}} \circ (-)^{\mathrm{op}} = \mathrm{Id}$---matching the involutive character of Axiom~\ref{ax:inv}. See Remark~\ref{rem:sign} below.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Properties (1) and (2) follow from the definition of the opposite
+category: $(-)^{\mathrm{op}}$ reverses all morphisms while preserving
+objects, and produces genuinely new theorems (the dual of any theorem
+is a distinct theorem about the opposite structure). Property~(3) is
+standard: $(\mathbf{C}^{\mathrm{op}})^{\mathrm{op}} \cong \mathbf{C}$
+for any category $\mathbf{C}$.
+
+The identification with $\recu{k}$ follows: the only axis that (a)
+acts on the \emph{structure} of the other axes rather than their
+content, (b) generates rather than cancels, and (c) is self-inverting,
+is $\recu{k}$ by Theorem~\ref{thm:split} and Axiom~\ref{ax:inv}.
+\end{proof}
+
+\begin{remark}[Sign of self-inversion]
+\label{rem:sign}
+Axiom~\ref{ax:inv} states $\mathcal{K} \circ \mathcal{K} = -\mathrm{Id}$
+(matching $k^2 = -1$ in quaternion algebra), while the categorical
+realisation satisfies $(-)^{\mathrm{op}} \circ (-)^{\mathrm{op}} =
+\mathrm{Id}$ (an involution). The essential property shared by both is
+\emph{self-inversion}: applying selection twice collapses to a
+determined state. The sign distinguishes two substrates: in
+$\mathbb{H}$, self-inversion produces a $180^\circ$ rotation
+($-\mathrm{Id}$); in $\mathbf{Cat}$, it produces the identity (exact
+return). Axiom K4 captures the quaternionic version because it preserves
+the full algebraic structure ($ij = k$, $jk = i$, $ki = j$), which
+requires $k^2 = -1$. The categorical realisation satisfies the weaker
+involutive form---it captures the generative and self-inverting character
+of $\recu{k}$ but not the rotational sign.
+\end{remark}
+
+\begin{theorem}[Kernel/image as $\recu{k}$]
+\label{thm:kerimg}
+The rank-nullity decomposition $V = \ker(f) \oplus \ker(f)^\perp$ of
+a linear map $f: V \to W$ (on finite-dimensional inner product spaces)
+is the structural realisation of $\recu{k}$ in linear algebra:
+\begin{enumerate}[nosep]
+  \item It is a meta-operation: testing $v \in \ker(f)$ requires
+    evaluating $f(v) = 0$, an examination of the map's own behaviour.
+  \item It generates without cancelling: the dimensions $\dim\ker f$
+    and $\operatorname{rank} f$ are global invariants invisible to any
+    single evaluation $f(v)$.
+  \item The complementary-projection map $P \mapsto \mathrm{Id} - P$
+    is an involution: $\mathrm{Id} - (\mathrm{Id} - P) = P$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) Membership $v \in \ker(f)$ requires comparing $f(v)$ against a
+criterion ($= 0$): a diagnostic on $f$'s output, not a computation
+within $V$. (2) The rank-nullity identity
+$\dim\ker f + \operatorname{rank} f = \dim V$ cannot be determined
+from fewer than $\dim V$ linearly independent evaluations---assembling
+such a spanning set is itself a selective ($\recu{k}$) operation.
+(3) Immediate: $C(P) = \mathrm{Id} - P$ satisfies $C \circ C =
+\mathrm{Id}$.
+
+A system with $k = 0$ can compute $f(v)$ for given $v$ but cannot
+test whether $f(v) = 0$ (no meta-diagnostic) and therefore cannot
+partition $V$ into kernel and image.
+\end{proof}
+
+\begin{theorem}[Eigenvalue spectrum as $\recu{k}$]
+\label{thm:spectrum}
+For a normal operator $A$ on a finite-dimensional inner product space,
+the spectral decomposition $A = \sum_i \lambda_i P_i$ is the structural
+realisation of $\recu{k}$ in operator algebra:
+\begin{enumerate}[nosep]
+  \item It is a meta-operation: the characteristic polynomial
+    $\det(A - \lambda I) = 0$ depends on all entries of $A$
+    simultaneously.
+  \item It generates without cancelling: the eigenvalues classify
+    $A$'s modes (expansion, contraction, oscillation, annihilation).
+  \item The adjoint map $A \mapsto A^*$ is an involution on operators
+    ($A^{**} = A$) inducing conjugation $\lambda \mapsto \bar\lambda$
+    on spectra.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) The characteristic polynomial $p_A(\lambda) = \det(A - \lambda I)$
+is a global function of $A$'s matrix entries; no single evaluation $Av$
+determines any eigenvalue. (2) The spectrum $\sigma(A)$ classifies
+qualitative dynamics on each eigenspace: a system limited to content
+axes sees $Av$ as a vector, not as $\lambda v$ for a mode~$\lambda$.
+(3) For normal $A = U\Lambda U^*$, $A^* = U\bar\Lambda U^*$, giving
+$\sigma(A^*) = \overline{\sigma(A)}$, and $(A^*)^* = A$.
+
+A system with $k = 0$ can compute $Av$ but cannot extract the
+eigenvalues---it sees individual outputs without classifying the modes
+that generate them.
+\end{proof}
+
+\begin{theorem}[Brouwer fixed point as $\recu{k}$]
+\label{thm:brouwer}
+The fixed-point operator $\mathrm{Fix}(f) = \{x \in D : f(x) = x\}$
+for continuous $f: D \to D$ on compact convex $D \subset \mathbb{R}^n$
+is the structural realisation of $\recu{k}$ in continuous dynamics:
+\begin{enumerate}[nosep]
+  \item It is a meta-operation: $f(x) = x$ compares the system's output
+    with its input---a self-referential diagnostic.
+  \item It generates without cancelling: Brouwer's theorem guarantees
+    $\mathrm{Fix}(f) \neq \emptyset$, a topological existence result
+    not determined by finitely many evaluations of $f$.
+  \item The reflection $f \mapsto 2\mathrm{Id} - f$ is a
+    fixed-point-preserving involution: $\mathrm{Fix}(f) = \mathrm{Fix}
+    (2\mathrm{Id} - f)$, and $2\mathrm{Id} - (2\mathrm{Id} - f) = f$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) The test $f(x) \stackrel{?}{=} x$ requires simultaneous access to
+$f$ and $\mathrm{Id}$---an operation on $f$'s structure, not within
+its domain. (2) Brouwer's theorem follows from the Lefschetz fixed
+point theorem ($L(f) \neq 0$ for contractible $D$): a global
+topological invariant, not a local computation.
+(3) If $f(x^*) = x^*$ then $(2x^* - f(x^*)) = x^*$, so
+$x^* \in \mathrm{Fix}(2\mathrm{Id} - f)$, and conversely.
+The composition $2\mathrm{Id} - (2\mathrm{Id} - f) = f$ is immediate.
+
+A system with $k = 0$ can evaluate $f(x)$ pointwise but cannot
+compare $f(x)$ with $x$ (no self-referential test) and therefore
+cannot locate fixed points.
+\end{proof}
+
+\begin{theorem}[Homology as $\recu{k}$]
+\label{thm:homology}
+For a simplicial complex $K$, the Betti numbers
+$\beta_n = \dim H_n(K) = \dim(\ker\partial_n /
+\operatorname{im}\partial_{n+1})$ are the structural realisation of
+$\recu{k}$ in algebraic topology:
+\begin{enumerate}[nosep]
+  \item It is a meta-operation: computing $H_n$ requires comparing
+    $\ker\partial_n$ against $\operatorname{im}\partial_{n+1}$---an
+    analysis of the boundary operators' own structure.
+  \item It generates without cancelling: the Betti numbers quantify
+    the ``structure of absence'' (independent $n$-cycles that do not
+    bound).
+  \item Poincar\'e duality for closed oriented $n$-manifolds,
+    $H_k(M) \cong H_{n-k}(M)$, is a dimension-swapping involution:
+    $k \mapsto n-k \mapsto k$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) The quotient $\ker\partial_n / \operatorname{im}\partial_{n+1}$
+asks ``which cycles are boundaries?''---a meta-question about the
+relationship between consecutive chain groups, not a computation
+within any single group. (2) Betti numbers detect what is
+\emph{absent}: $\beta_1$ counts independent loops, $\beta_2$ counts
+independent voids. This is information about holes in $K$, not about
+simplices present in $K$. (3) For closed oriented $n$-manifolds,
+$\beta_k = \beta_{n-k}$, and the dimension map $k \mapsto n-k$
+satisfies $n - (n-k) = k$.
+
+A system with $k = 0$ can compute boundaries $\partial\sigma$ of
+individual simplices but cannot determine which cycles bound---it sees
+local boundary relations without the global analysis distinguishing
+homologous from trivial cycles.
+\end{proof}
+
+\begin{remark}[Involution forms]
+\label{rem:involution-forms}
+Each generative algebra realises $\recu{k}$'s self-inverting character
+through a different involution:
+complementary projection ($P \mapsto \mathrm{Id} - P$) for
+kernel/image,
+operator adjunction ($A \mapsto A^*$) for eigenvalues,
+dynamical reflection ($f \mapsto 2\mathrm{Id} - f$) for fixed points,
+and Poincar\'e duality ($H_k \leftrightarrow H_{n-k}$) for homology.
+Like Remark~\ref{rem:sign}, these are substrate-specific realisations
+of the same structural property: double application returns to the
+original.
+\end{remark}
+
+%======================================================================
+\section{Pathologies as Axis Collapses}
+\label{sec:pathologies}
+%======================================================================
+
+Each kingdom's absence produces a diagnosable pathology:
+
+\begin{pathologybox}[title={Dogma ($\imag{i} = 0$)}]
+\begin{equation}
+\text{Dogma} = (\rey{r} > 0,\; \imag{i} = 0,\;
+\exac{j} > 0,\; \recu{k} \geq 0)
+\end{equation}
+Crystallised, verified, possibly even selective---but without
+potentiality. No ``what if?'' is permitted. Truth frozen.
+Ice that has forgotten it was once water.
+\end{pathologybox}
+
+\begin{pathologybox}[title={Delirium ($\rey{r} = 0$)}]
+\begin{equation}
+\text{Delirium} = (\rey{r} = 0,\; \imag{i} > 0,\;
+\exac{j} \geq 0,\; \recu{k} \geq 0)
+\end{equation}
+Pure potentiality without crystallisation.
+Heat without container. The artist with a thousand visions who
+finishes nothing.
+\end{pathologybox}
+
+\begin{pathologybox}[title={Pseudoscience ($\exac{j} = 0$)}]
+\begin{equation}
+\text{Pseudoscience} = (\rey{r} > 0,\; \imag{i} > 0,\;
+\exac{j} = 0,\; \recu{k} \geq 0)
+\end{equation}
+Structure and imagination without verification.
+``It sounds right'' and ``everything fits'' but nobody has
+measured anything. The paper that diagnostics detects:
+elegant framework, zero empirical contact.
+\end{pathologybox}
+
+\begin{pathologybox}[title={Stagnation ($\recu{k} = 0$)}]
+\begin{equation}
+\text{Stagnation} = (\rey{r} > 0,\; \imag{i} > 0,\;
+\exac{j} > 0,\; \recu{k} = 0)
+\end{equation}
+Crystallised, imaginative, verified---but never pruning,
+never rotating, never advancing. The committee that discusses
+endlessly without deciding. Evolution without natural selection:
+variation without fitness.
+\end{pathologybox}
+
+\bigskip
+
+\begin{definition}[Liquid Zone]
+\label{def:liquid}
+The \textbf{liquid zone} is the region of the semantic hypercube where
+all four axes are simultaneously non-zero:
+\begin{equation}
+\LZ = \{s \in [0,1]^4 : \rey{r} > 0 \;\land\;
+\imag{i} > 0 \;\land\; \exac{j} > 0 \;\land\; \recu{k} > 0\}
+\end{equation}
+Phase transitions are trajectories that enter or exit $\LZ$
+by collapsing or activating an axis.
+\end{definition}
+
+\subsection{Topological Properties}
+
+\begin{proposition}[Openness]
+\label{prop:open}
+$\LZ$ is open in the relative topology of $H = [0,1]^4$.
+\end{proposition}
+
+\begin{proof}
+For each coordinate $x \in \{r, i, j, k\}$, the set $\{s \in H : x >
+0\}$ is open in $H$ (it is $H \cap \{x > 0\}$, and $\{x > 0\}$ is
+open in $\mathbb{R}^4$). Since $\LZ$ is the intersection of four such
+open sets, it is open.
+\end{proof}
+
+\begin{proposition}[Convexity and path-connectedness]
+\label{prop:convex}
+$\LZ$ is convex and hence path-connected.
+\end{proposition}
+
+\begin{proof}
+Let $s_1, s_2 \in \LZ$ and $t \in [0,1]$. Then $s_t = (1-t)s_1 + t
+s_2$ satisfies: each coordinate of $s_t$ is a convex combination of
+two strictly positive numbers in $[0,1]$, hence strictly positive and
+in $[0,1]$. Therefore $s_t \in \LZ$, and $\LZ$ is convex. Convexity
+implies path-connectedness.
+\end{proof}
+
+\begin{proposition}[Disjointness of pathologies]
+\label{prop:disjoint}
+The four pathological regions are pairwise disjoint.
+\end{proposition}
+
+\begin{proof}
+Each pathology sets a \emph{different} axis to zero while requiring at
+least two others to be strictly positive. For any pair of pathologies,
+at least one requires a coordinate to be positive that the other
+requires to be zero (or vice versa), so their intersection is empty.
+Explicitly:
+$\mathcal{D}_{\text{dogma}} \cap \mathcal{D}_{\text{delirium}} =
+\emptyset$ because dogma requires $r > 0$ while delirium requires
+$r = 0$.
+$\mathcal{D}_{\text{dogma}} \cap \mathcal{D}_{\text{pseudo}} =
+\emptyset$ because dogma requires $j > 0$ while pseudoscience requires
+$j = 0$.
+$\mathcal{D}_{\text{dogma}} \cap \mathcal{D}_{\text{stag}} =
+\emptyset$ because dogma requires $i = 0$ while stagnation requires
+$i > 0$.
+$\mathcal{D}_{\text{delirium}} \cap \mathcal{D}_{\text{pseudo}} =
+\emptyset$ because delirium requires $r = 0$ while pseudoscience
+requires $r > 0$.
+$\mathcal{D}_{\text{delirium}} \cap \mathcal{D}_{\text{stag}} =
+\emptyset$ because delirium requires $r = 0$ while stagnation requires
+$r > 0$.
+$\mathcal{D}_{\text{pseudo}} \cap \mathcal{D}_{\text{stag}} =
+\emptyset$ because pseudoscience requires $j = 0$ while stagnation
+requires $j > 0$.
+\end{proof}
+
+\begin{proposition}[Complementarity]
+\label{prop:complement}
+$\LZ \cap \mathcal{D}_{\alpha} = \emptyset$ for each pathology
+$\alpha$. The liquid zone is disjoint from all pathological regions.
+\end{proposition}
+
+\begin{proof}
+Every state in $\LZ$ has all four coordinates strictly positive. Every
+pathological state has at least one coordinate equal to zero.
+\end{proof}
+
+%======================================================================
+\section{The Quaternionic Product on \texorpdfstring{$S^3$}{S3}}
+\label{sec:quaternion}
+%======================================================================
+
+The four axes $\{1, \imag{i}, \exac{j}, \recu{k}\}$ mirror the basis of
+Hamilton's quaternions $\mathbb{H}$, with the multiplication rules:
+\begin{equation}
+\imag{i}^2 = \exac{j}^2 = \recu{k}^2 = \imag{i}\exac{j}\recu{k} = -1
+\end{equation}
+\begin{equation}
+\imag{i}\exac{j} = \recu{k}, \quad
+\exac{j}\recu{k} = \imag{i}, \quad
+\recu{k}\imag{i} = \exac{j}
+\end{equation}
+
+Each rule receives a semantic interpretation:
+\begin{enumerate}[nosep]
+\item $\imag{i}^2 = -1$: Potentiality interacting with itself produces
+  inversion. A dream that dreams itself collapses or inverts.
+\item $\exac{j}^2 = -1$: Verification verifying itself without content
+  produces negation. A measurement of a measurement, absent anything to
+  measure, is vacuous.
+\item $\recu{k}^2 = -1$: Selection selecting itself produces inversion.
+  Recursion without base case is infinite regress. (Axiom~\ref{ax:inv}.)
+\item $\imag{i}\exac{j} = \recu{k}$: Potentiality plus directionality
+  produces selection. Imagining \emph{where to go} generates the
+  capacity to choose. (Axiom~\ref{ax:gen}.)
+\item $\exac{j}\recu{k} = \imag{i}$: Directionality plus selection
+  produces potentiality. Constraint enables creativity.
+\item $\recu{k}\imag{i} = \exac{j}$: Selection plus potentiality
+  produces directionality. Choosing among possibilities creates order.
+\end{enumerate}
+
+\begin{remark}
+The non-commutativity of quaternion multiplication
+($\imag{i}\exac{j} \neq \exac{j}\imag{i}$) has a direct semantic
+reading: imagining first and then measuring produces a different outcome
+than measuring first and then imagining. The order of ontological
+operations matters.
+\end{remark}
+
+\begin{theorem}[Semantic quaternionic product]
+\label{thm:quat_product}
+For semantic states $s_1,s_2\in\mathbb{R}^4\setminus\{0\}$,
+define $\hat{s}=s/\|s\|$ and
+$s_1\otimes s_2=\hat{s}_1\cdot_{\mathbb{H}}\hat{s}_2$,
+where $\cdot_{\mathbb{H}}$ is Hamilton multiplication.
+This product:
+\begin{enumerate}[nosep]
+  \item is closed on $S^3$,
+  \item is associative,
+  \item admits inverses,
+  \item satisfies the basis relations: $ij=k$, $jk=i$, $ki=j$, $i^2=j^2=k^2=ijk=-1$,
+  \item is non-commutative ($ij \neq ji$), and
+  \item respects layer recovery: products of real-subspace elements remain in the real subspace.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Write $\hat{s}_j=s_j/\|s_j\|$ for the unit normalisation.
+
+\emph{(1) Closure.}
+$\|\hat{s}_1\cdot_{\mathbb{H}}\hat{s}_2\|
+=\|\hat{s}_1\|\,\|\hat{s}_2\|=1\cdot1=1$,
+by the multiplicativity of the quaternion norm.
+
+\emph{(2) Associativity.}
+$\hat{s}_1\otimes(\hat{s}_2\otimes\hat{s}_3)
+=\hat{s}_1\cdot_{\mathbb{H}}(\hat{s}_2\cdot_{\mathbb{H}}\hat{s}_3)
+=(\hat{s}_1\cdot_{\mathbb{H}}\hat{s}_2)\cdot_{\mathbb{H}}\hat{s}_3
+=(\hat{s}_1\otimes\hat{s}_2)\otimes\hat{s}_3$,
+since Hamilton multiplication is associative and the normalisation
+of a unit quaternion is the identity.
+
+\emph{(3) Inverses.}
+For any unit quaternion $\hat{s}$,
+$\hat{s}^{-1}=\overline{\hat{s}}$ (the quaternion conjugate),
+and $\hat{s}\,\overline{\hat{s}}=\|\hat{s}\|^2=1$.
+
+\emph{(4) Basis relations.}
+These are the defining relations of the quaternion algebra
+$\mathbb{H}=\langle 1,i,j,k\mid i^2=j^2=k^2=ijk=-1\rangle$.
+
+\emph{(5) Non-commutativity.}
+$ij=k$ while $ji=-k$, so $ij\neq ji$.
+
+\emph{(6) Real subspace.}
+If $\Imag(\hat{s}_1)=\Imag(\hat{s}_2)=0$, then
+$\hat{s}_1,\hat{s}_2\in\{\pm1\}\subset\mathbb{R}\subset\mathbb{H}$,
+and their product is $\pm1$, which is real.
+
+All six properties are additionally verified computationally at
+machine precision ($\varepsilon<10^{-15}$) over $10{,}000$ random
+pairs and all $72$ semantic primitives from~\citet{p2}.
+\end{proof}
+
+%======================================================================
+\section{Relation to Information Theory}
+\label{sec:shannon}
+%======================================================================
+
+Shannon~\citeyearpar{shannon1948} defined information along a single
+axis: certainty/uncertainty. A classical bit is $\{0,1\}$ and entropy
+$H = -\sum p_i \log p_i$ measures ignorance. But this captures only
+\emph{resolved} information---the projection onto $\rey{r}$.
+
+\begin{proposition}[Shannon as special case]
+\label{prop:shannon}
+Shannon information theory is the restriction of $\Op$ to:
+\begin{equation}
+\text{Shannon} = \Op\big|_{\imag{i}=0,\;\exac{j}=1,\;\recu{k}=0}
+= \text{projection onto } \rey{r}
+\end{equation}
+The conditions are: no potentiality (all information is resolved),
+full verifiability (all information is measurable), and no recursive
+selection (the channel is passive).
+\end{proposition}
+
+\begin{proof}
+Under the Shannon restriction: $\imag{i} = 0$ (all information is
+resolved), $\exac{j} = 1$ (all information is fully verifiable),
+$\recu{k} = 0$ (the channel is passive---it transmits but does not
+select). Shannon's entropy operates on probability distributions over
+resolved, measurable states with no selective agency. The condition
+$k = 0$ explains why Shannon's theory has no concept of a channel that
+\emph{chooses} what to transmit: the selective axis is collapsed.
+\end{proof}
+
+The natural extension follows the algebraic progression of number
+systems:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Number system} & \textbf{Operator} &
+\textbf{Information captured} \\
+\midrule
+$\mathbb{R}$ (reals)        & $\{0, 1\}$
+  & Classical bit: presence/absence \\
+$\mathbb{C}$ (complex)      & $(\rey{r}, \imag{i})$
+  & Information with potentiality \\
+$\mathbb{H}$ (quaternions)  & $(\rey{r}, \imag{i}, \exac{j}, \recu{k})$
+  & Information with potentiality, verifiability, and selection \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%======================================================================
 \section{Epistemic Dimensions Are Not Decoration}
 \label{sec:decoration}
 %======================================================================
@@ -636,6 +1896,107 @@ even when they agree on the truth. The non-commutativity is the
 algebraic encoding of irreversible cause--effect chains.
 
 %======================================================================
+\section{Embedding the Prime Algebra into the G-Lattice}
+\label{sec:embedding}
+%======================================================================
+
+The prime-algebraic framework of~\citet{p4} encodes each concept $C$
+as a product of primes $\Phi(C)=\prod_{i=1}^{72}p_i^{s_i}$,
+$s_i\in\{0,1\}$, where the 72 primitives are distributed across six
+algebraic layers. The binary exponent vector
+$\mathbf{s}(C)=(s_1,\ldots,s_{72})\in\{0,1\}^{72}$ turns
+divisibility into componentwise $\leq$, gcd into componentwise min,
+and lcm into componentwise max~\citep{birkhoff1967}.
+
+\begin{definition}[Layer projection]
+\label{def:layer_proj}
+Partition the 72 indices into layer sets
+$L_1,\ldots,L_6$ ($|L_1|=3$, $|L_2|=8$, $|L_3|=13$, $|L_4|=21$,
+$|L_5|=23$, $|L_6|=4$). Define axis-contributing sets by the semantic
+content of Table~\ref{tab:unified}:
+\begin{alignat*}{2}
+  R &= L_1\cup L_2\cup L_4\cup L_6 &\quad& (|R|=36),\\
+  I &= L_4\cup L_6 &\quad& (|I|=25),\\
+  J &= L_3\cup L_5\cup L_6 &\quad& (|J|=40),\\
+  K &= L_6 &\quad& (|K|=4).
+\end{alignat*}
+The \emph{layer embedding} is
+$e\colon\{0,1\}^{72}\to[0,1]^4$,
+\[
+  e(\mathbf{s}) \;=\;
+  \Bigl(\;
+    \frac{\sum_{i\in R}s_i}{|R|},\;
+    \frac{\sum_{i\in I}s_i}{|I|},\;
+    \frac{\sum_{i\in J}s_i}{|J|},\;
+    \frac{\sum_{i\in K}s_i}{|K|}
+  \;\Bigr).
+\]
+For the G-lattice domain $V=[0,1]\times[-1,1]^3$, rescale the
+imaginary components: $\hat{e}=(e_r,\,2e_i-1,\,2e_j-1,\,2e_k-1)$.
+\end{definition}
+
+\begin{theorem}[Synthesis embedding]
+\label{thm:embedding}
+Let $A,B$ be concepts with exponent vectors $\mathbf{s}(A),\mathbf{s}(B)$.
+\begin{enumerate}[nosep]
+\item\label{it:mono} \textbf{Monotonicity.}
+  $\Phi(A)\mid\Phi(B)$ implies
+  $e(\mathbf{s}(A))\leq e(\mathbf{s}(B))$ componentwise.
+\item\label{it:lcm} \textbf{Lattice compatibility.}
+  $e(\mathbf{s}(\operatorname{lcm}))\geq
+   \max\!\bigl(e(\mathbf{s}(A)),\,e(\mathbf{s}(B))\bigr)$
+  componentwise, where $\operatorname{lcm}$
+  denotes $\operatorname{lcm}(\Phi(A),\Phi(B))$.
+\item\label{it:strict} \textbf{Strict synthesis.}
+  Define the \emph{interiors}
+  $\mathrm{Int}(A\!\mid\! B)=\{i:s_i(A)=1,\,s_i(B)=0\}$ and
+  $\mathrm{Int}(B\!\mid\! A)=\{i:s_i(B)=1,\,s_i(A)=0\}$.
+  The inequality in~(\ref{it:lcm}) is strict on axis $X$ if and
+  only if both interiors have $X$-support:
+  \[
+    e(\mathbf{s}(\operatorname{lcm}))_X
+    > \max(e(\mathbf{s}(A))_X,\,e(\mathbf{s}(B))_X)
+    \;\;\Longleftrightarrow\;\;
+    \mathrm{Int}(A\!\mid\! B)\cap X\neq\emptyset
+    \;\text{and}\;
+    \mathrm{Int}(B\!\mid\! A)\cap X\neq\emptyset.
+  \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\textbf{(\ref{it:mono})}
+$\Phi(A)\mid\Phi(B)$ means $s_i(A)\leq s_i(B)$ for all $i$, so
+$\sum_{i\in X}s_i(A)\leq\sum_{i\in X}s_i(B)$ for every axis set $X$.
+
+\textbf{(\ref{it:lcm})}
+$s_i(\text{lcm})=\max(s_i(A),s_i(B))\geq s_i(A)$ for all~$i$, so
+$\sum_{i\in X}\max(s_i(A),s_i(B))\geq\sum_{i\in X}s_i(A)$, and
+similarly for~$B$. Dividing by $|X|$ gives
+$e(\mathbf{s}(\text{lcm}))_X\geq\max(e_X(A),e_X(B))$.
+
+\textbf{(\ref{it:strict})}
+Let $A_X=\{i\in X:s_i(A)=1\}$ and $B_X=\{i\in X:s_i(B)=1\}$.
+Then $e(\mathbf{s}(\text{lcm}))_X=|A_X\cup B_X|/|X|$ and
+$\max(e_X(A),e_X(B))=\max(|A_X|,|B_X|)/|X|$.
+The union strictly exceeds the larger set iff neither is a
+subset of the other: $A_X\not\subseteq B_X$ and
+$B_X\not\subseteq A_X$. The first holds iff
+$\mathrm{Int}(A\!\mid\! B)\cap X\neq\emptyset$;
+the second iff $\mathrm{Int}(B\!\mid\! A)\cap X\neq\emptyset$.
+\end{proof}
+
+\begin{remark}[Degenerate pairs]
+When $\Phi(A)\mid\Phi(B)$, the interior $\mathrm{Int}(A\!\mid\! B)$
+is empty and synthesis reduces to $\operatorname{lcm}=\Phi(B)$: no
+axis shows strict increase because $A$ is already contained in~$B$.
+Three of the fourteen duality pairs from~\citet{p4} exhibit this
+degeneracy (their dependency chains are in a subset relation); the
+remaining eleven all show strict increase on every axis with bilateral
+interior support, as predicted by Theorem~\ref{thm:embedding}(\ref{it:strict}).
+\end{remark}
+
+%======================================================================
 \section{Computational Verification}
 \label{sec:computation}
 %======================================================================
@@ -651,7 +2012,7 @@ Random test cases were drawn uniformly from the appropriate domains.
 \toprule
 \textbf{Test} & \textbf{N} & \textbf{Violations} & \textbf{Max error} \\
 \midrule
-Specialisations (2 exact + 4 interpretive) & --- & 0 & exact \\
+Specialisations (4 exact + 2 interpretive) & --- & 0 & exact \\
 De Morgan laws (extended domain) & 50\,000 & 0 & $0$ \\
 $\Real$ invariance under conjugation & 50\,000 & 0 & $5.55\times10^{-16}$ \\
 $\|\Imag\|$ invariance under conjugation & 10\,000 & 0 & $6.66\times10^{-16}$ \\
@@ -670,6 +2031,12 @@ $\Real$-independence (all connectives) & 100\,000 & 0 & $0$ \\
 $\Real$-independence (7 compounds) & 100\,000 & 0 & $0$ \\
 $G^\sim$ tautologies (6 formulas) & 100\,000 & 0 & confirmed \\
 Non-tautologies (4 formulas) & 100\,000 & 0 & confirmed \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Embedding (Section~\ref{sec:embedding})}} \\
+Layer consistency (P1) & 4 & 0 & exact \\
+Divisibility $\Rightarrow$ order (P3) & 10\,000 & 0 & exact \\
+lcm $\geq$ max (P4) & 10\,000 & 0 & exact \\
+Bilateral synthesis (14 pairs) & 14 & 0 & exact \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -723,25 +2090,49 @@ perspectival epistemic character.
 \label{sec:conclusion}
 %======================================================================
 
-We have shown that the quaternionic operator from \citet{ornelas2026p9}
-supports a G-lattice that genuinely unifies Boolean and fuzzy
-frameworks. The unification is not mere containment: it is mediated
-by a commutation theorem that characterises Boolean logic as the
-context-free special case. The four-dimensional logic introduces
-context sensitivity, path-dependent epistemic chains, and
-operationally distinguishable epistemic dimensions---properties
-absent from any individual restriction.
+We have constructed a quaternionic operator
+$\Op=\{0,1,+,\imag{i},\exac{j},\recu{k}\}$ from which six algebraic
+layers are recoverable as dimensional projections---four exactly
+(Boolean, G\"odel fuzzy, G\"odel--Kripke modal, and Kleene
+trivalent) and two interpretively (ordinal and probabilistic)---and
+shown that it supports a G-lattice---a residuated lattice equipped
+with an $\SU$ group action---that genuinely unifies Boolean and fuzzy
+frameworks.
 
-\paragraph{Completeness.}
-The G-lattice inherits completeness from $G^\sim$ (G\"odel logic
-with involutive negation) via the real-part independence lemma
-(Theorem~\ref{thm:completeness}). The negation-free fragment
-reduces to standard G\"odel--Dummett. The imaginary dimensions do
-not alter tautologies---they enrich the surrounding structure.
+The unification is not mere containment: it is mediated by a
+commutation theorem (Theorem~\ref{thm:commutation}) that characterises
+Boolean logic as the context-free special case. The fourth axis
+$\recu{k}$ is proven irreducible (Theorem~\ref{thm:irred}), and its
+presence divides the nine known algebras of opposition into
+cancellative and generative classes
+(Theorem~\ref{thm:split}), with formal $\recu{k}$-embeddings for
+all five generative algebras
+(Theorems~\ref{thm:catdual}--\ref{thm:homology}). Each axis's absence produces a
+diagnosable pathology, and the region where all four axes are
+simultaneously active---the liquid zone---is open, convex, and
+path-connected.
 
-\paragraph{Future work.}
-Empirical validation on the 72 semantic primitives from
-\citet{ornelas2026p9} is planned.
+Completeness reduces to $G^\sim$ (G\"odel logic with involutive
+negation) via the real-part independence lemma. The imaginary
+dimensions do not alter tautologies---they enrich the surrounding
+structure with context sensitivity, path-dependent epistemic chains,
+and operationally distinguishable epistemic dimensions. A layer-based
+embedding (Theorem~\ref{thm:embedding}) connects the prime-algebraic
+framework of~\citet{p4} to the G-lattice coordinates, with a bilateral
+synthesis theorem characterising exactly when duality synthesis
+produces strict increase on each axis.
+
+The framework developed here is extended in three companion papers:
+\citet{p11_1} investigates whether Hamilton multiplication yields a
+genuinely non-commutative conjunction, proving a trilemma that rules
+out such constructions on the semantic domain;
+\citet{p12} develops the synthesis operation on the prime algebra and
+shows that opposites generate new truth at higher algebraic layers
+through an irreducibly second-order gap operation; and
+\citet{p13} formalises pre-logical states---points in $V$ where the
+truth axis is undefined---and proves that information emerges as
+the compound concept of the pre-logical/\allowbreak logical duality,
+with substrate independence demonstrated across four domains.
 
 %======================================================================
 % References
@@ -749,36 +2140,57 @@ Empirical validation on the 72 semantic primitives from
 \bibliographystyle{plainnat}
 \begin{thebibliography}{99}
 
+\bibitem[Belnap(1977)]{belnap1977}
+Belnap, N.D. (1977).
+A useful four-valued logic.
+In: Dunn, J.M., Epstein, G. (eds.) \textit{Modern Uses of
+Multiple-Valued Logic}, pp.~5--37. Reidel.
+
+\bibitem[Birkhoff(1967)]{birkhoff1967}
+Birkhoff, G. (1967).
+\textit{Lattice Theory}, 3rd ed.
+American Mathematical Society.
+
 \bibitem[Birkhoff \& von Neumann(1936)]{birkhoff1936}
 Birkhoff, G. \& von Neumann, J. (1936).
 The logic of quantum mechanics.
 \textit{Annals of Mathematics}, 37(4), 823--843.
 
-\bibitem[Dummett(1959)]{dummett1959}
-Dummett, M. (1959).
-A propositional calculus with denumerable matrix.
-\textit{Journal of Symbolic Logic}, 24(2), 97--106.
+\bibitem[Bou et~al.(2011)]{bou2011}
+Bou, F., Esteva, F., Godo, L. \& Rodriguez, R. (2011).
+On the minimum many-valued modal logic over a finite residuated
+lattice.
+\textit{Journal of Logic and Computation}, 21(5), 739--790.
 
-\bibitem[Dai(2023)]{dai2023}
-Dai, S. (2023).
-Quaternionic fuzzy sets.
-\textit{Axioms}, 12(5), 490.
+\bibitem[Caicedo \& Rodriguez(2010)]{caicedo2010}
+Caicedo, X. \& Rodriguez, R. (2010).
+Standard G\"odel modal logics.
+\textit{Studia Logica}, 94(2), 189--214.
 
 \bibitem[Cignoli et~al.(2000)]{cignoli2000}
 Cignoli, R., D'Ottaviano, I. \& Mundici, D. (2000).
 \textit{Algebraic Foundations of Many-Valued Reasoning}.
 Kluwer.
 
+\bibitem[Dai(2023)]{dai2023}
+Dai, S. (2023).
+Quaternionic fuzzy sets.
+\textit{Axioms}, 12(5), 490.
+
+\bibitem[Dummett(1959)]{dummett1959}
+Dummett, M. (1959).
+A propositional calculus with denumerable matrix.
+\textit{Journal of Symbolic Logic}, 24(2), 97--106.
+
+\bibitem[Fitting(1991)]{fitting1991}
+Fitting, M. (1991).
+Many-valued modal logics.
+\textit{Fundamenta Informaticae}, 15(3--4), 235--254.
+
 \bibitem[Esteva et~al.(2000)]{esteva2000}
 Esteva, F., Godo, L., H\'ajek, P. \& Navara, M. (2000).
 Residuated fuzzy logics with an involutive negation.
 \textit{Archive for Mathematical Logic}, 39(2), 103--124.
-
-\bibitem[Esteva \& Godo(2001)]{esteva2001}
-Esteva, F. \& Godo, L. (2001).
-Monoidal t-norm based logic: towards a logic for left-continuous
-t-norms.
-\textit{Fuzzy Sets and Systems}, 124(3), 271--288.
 
 \bibitem[Galatos et~al.(2007)]{galatos2007}
 Galatos, N., Jipsen, P., Kowalski, T. \& Ono, H. (2007).
@@ -791,26 +2203,79 @@ H\'ajek, P. (1998).
 \textit{Metamathematics of Fuzzy Logic}.
 Kluwer.
 
+\bibitem[Hofstadter(1979)]{hofstadter1979}
+Hofstadter, D.R. (1979).
+\textit{G\"odel, Escher, Bach: An Eternal Golden Braid}.
+Basic Books.
+
+\bibitem[Lounesto(2001)]{lounesto2001}
+Lounesto, P. (2001).
+\textit{Clifford Algebras and Spinors}, 2nd ed.
+Cambridge University Press.
+
 \bibitem[Mulvey(1986)]{mulvey1986}
 Mulvey, C.J. (1986).
 \&.
 \textit{Rendiconti del Circolo Matematico di Palermo}, Suppl. 12,
 99--104.
 
-\bibitem[Ornelas Brand(2026)]{ornelas2026p9}
+\bibitem[Ornelas Brand(2026a)]{p1}
 Ornelas Brand, J.A. (2026).
-The Primitive Equation of Information.
-Manuscript in preparation.
+Triadic Neurosymbolic Engine: Prime Factorization as a Neurosymbolic
+Bridge: Projecting Continuous Embeddings into Discrete Algebraic Space
+for Deterministic Verification.
+\textit{Zenodo}.
+\href{https://doi.org/10.5281/zenodo.19205804}{doi:10.5281/zenodo.19205804}
+
+\bibitem[Ornelas Brand(2026b)]{p2}
+Ornelas Brand, J.A. (2026).
+End-to-End Prime Factorization in a Generative Language Model:
+Emergent Algebraic Semantics from Joint Training.
+\textit{Zenodo}.
+\href{https://doi.org/10.5281/zenodo.19206544}{doi:10.5281/zenodo.19206544}
+
+\bibitem[Ornelas Brand(2026c)]{p4}
+Ornelas Brand, J.A. (2026).
+Toward a Layered Ontology of Semantic Duality: 14 Candidate Dualities
+Across 6 Algebraic Layers with Preliminary Domain and Neural Evidence
+(v1.0).
+\textit{Zenodo}.
+\href{https://doi.org/10.5281/zenodo.19375166}{doi:10.5281/zenodo.19375166}
+
+\bibitem[Ornelas Brand(2026d)]{p11_1}
+Ornelas Brand, J.A. (2026).
+Toward a Non-Commutative Residuated Lattice from Quaternion
+Multiplication (v0.1.0).
+\textit{Zenodo}.
+\href{https://doi.org/10.5281/zenodo.19561406}{doi:10.5281/zenodo.19561406}
+
+\bibitem[Ornelas Brand(2026e)]{p12}
+Ornelas Brand, J.A. (2026).
+Duality Synthesis in Quaternionic Logic: How Opposites Generate Truth (v0.1.0).
+\textit{Zenodo}.
+\href{https://doi.org/10.5281/zenodo.19561633}{doi:10.5281/zenodo.19561633}
+
+\bibitem[Ornelas Brand(2026f)]{p13}
+Ornelas Brand, J.A. (2026).
+Pre-Logical States and the Birth of Information: How Reasoning
+Operates Before Truth Exists (v0.1.0).
+\textit{Zenodo}.
+\href{https://doi.org/10.5281/zenodo.19561721}{doi:10.5281/zenodo.19561721}
+
+\bibitem[Porteous(1995)]{porteous1995}
+Porteous, I.R. (1995).
+\textit{Clifford Algebras and the Classical Groups}.
+Cambridge University Press.
 
 \bibitem[Restall(2000)]{restall2000}
 Restall, G. (2000).
 \textit{An Introduction to Substructural Logics}.
 Routledge.
 
-\bibitem[Zadeh(1965)]{zadeh1965}
-Zadeh, L.A. (1965).
-Fuzzy sets.
-\textit{Information and Control}, 8(3), 338--353.
+\bibitem[Shannon(1948)]{shannon1948}
+Shannon, C.E. (1948).
+A mathematical theory of communication.
+\textit{The Bell System Technical Journal}, 27(3), 379--423.
 
 \end{thebibliography}
 
