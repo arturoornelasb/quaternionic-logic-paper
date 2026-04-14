@@ -2,6 +2,7 @@
 
 **Author:** J. Arturo Ornelas Brand — arturoornelas62@gmail.com
 **Paper DOI:** [10.5281/zenodo.19562014](https://doi.org/10.5281/zenodo.19562014) (v0.1.1, all versions: [10.5281/zenodo.19560986](https://doi.org/10.5281/zenodo.19560986))
+**Repository archive DOI:** [10.5281/zenodo.19563494](https://doi.org/10.5281/zenodo.19563494) (v0.1.1, all versions: [10.5281/zenodo.19563493](https://doi.org/10.5281/zenodo.19563493))
 **Status:** Published on Zenodo.
 
 ## Result
@@ -101,6 +102,16 @@ https://doi.org/10.5281/zenodo.19562014
 ```
 
 Concept DOI (all versions): [10.5281/zenodo.19560986](https://doi.org/10.5281/zenodo.19560986)
+
+Repository archive:
+
+```
+Ornelas Brand, J.A. (2026). Quaternionic Logic: A G-Lattice Unifying
+Boolean and Fuzzy Frameworks (repository) (v0.1.1). Zenodo.
+https://doi.org/10.5281/zenodo.19563494
+```
+
+Concept DOI (all versions): [10.5281/zenodo.19563493](https://doi.org/10.5281/zenodo.19563493)
 
 Companion papers:
 
