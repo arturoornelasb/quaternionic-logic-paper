@@ -1,7 +1,7 @@
 {
-    "title": "Quaternionic Logic: A G-Lattice Unifying Boolean and Fuzzy Frameworks",
+    "title": "Quaternionic Logic: A G-Lattice Unifying Boolean and Fuzzy Frameworks (repository)",
     "version": "0.1.1",
-    "description": "A formal logic defined as a G-lattice: a bounded residuated lattice on [0,1] x [-1,1]^3 equipped with an SU(2) group action by quaternionic conjugation. Connectives (AND, OR, NOT, IMPLIES) define what is true; conjugation q*a*q^{-1} defines from which perspective one evaluates. Central theorem: connectives commute with context transformations if and only if they operate only on the real component. Corollary: Boolean logic is the context-free special case; full quaternionic logic is context-dependent. Six known logics (Boolean, Godel fuzzy, Godel-Kripke modal, Kleene trivalent, ordinal, probabilistic) are recovered as dimensional restrictions. Soundness and completeness are proved via reduction to Godel logic with involutive negation. No exact precedent for this combination (residuated lattice + SU(2) conjugation with real-part invariance) was found in the literature.",
+    "description": "Repository accompanying the paper 'Quaternionic Logic: A G-Lattice Unifying Boolean and Fuzzy Frameworks' (Zenodo DOI 10.5281/zenodo.19562014). Contains LaTeX source, compiled PDF, verification scripts, and research notes. The paper defines a formal logic as a G-lattice: a bounded residuated lattice on [0,1] x [-1,1]^3 equipped with an SU(2) group action by quaternionic conjugation. Central theorem: connectives commute with context transformations if and only if they operate only on the real component. Six known logics (Boolean, Godel fuzzy, Godel-Kripke modal, Kleene trivalent, ordinal, probabilistic) are recovered as dimensional restrictions; soundness and completeness are proved via reduction to Godel logic with involutive negation.",
     "creators": [
         {
             "name": "Ornelas Brand, J. Arturo",
@@ -9,8 +9,7 @@
             "email": "arturoornelas62@gmail.com"
         }
     ],
-    "upload_type": "publication",
-    "publication_type": "preprint",
+    "upload_type": "software",
     "access_right": "open",
     "license": "busl-1.1",
     "keywords": [
@@ -19,12 +18,10 @@
         "residuated lattice",
         "Boolean logic",
         "fuzzy logic",
-        "modal logic",
         "SU(2)",
         "algebraic logic",
         "Godel logic",
-        "context-dependent logic",
-        "soundness",
+        "verification scripts",
         "completeness"
     ],
     "related_identifiers": [
@@ -34,39 +31,27 @@
             "resource_type": "software"
         },
         {
+            "identifier": "10.5281/zenodo.19562014",
+            "relation": "isSupplementTo",
+            "resource_type": "publication-preprint",
+            "scheme": "doi"
+        },
+        {
             "identifier": "10.5281/zenodo.19561407",
-            "relation": "isContinuedBy",
+            "relation": "references",
             "resource_type": "publication-preprint",
             "scheme": "doi"
         },
         {
             "identifier": "10.5281/zenodo.19561634",
-            "relation": "isContinuedBy",
+            "relation": "references",
             "resource_type": "publication-preprint",
             "scheme": "doi"
         },
         {
             "identifier": "10.5281/zenodo.19561722",
-            "relation": "isContinuedBy",
+            "relation": "references",
             "resource_type": "publication-preprint",
-            "scheme": "doi"
-        },
-        {
-            "identifier": "10.5281/zenodo.19205804",
-            "relation": "isCitedBy",
-            "resource_type": "software",
-            "scheme": "doi"
-        },
-        {
-            "identifier": "10.5281/zenodo.19206544",
-            "relation": "isCitedBy",
-            "resource_type": "software",
-            "scheme": "doi"
-        },
-        {
-            "identifier": "10.5281/zenodo.19375166",
-            "relation": "isCitedBy",
-            "resource_type": "software",
             "scheme": "doi"
         }
     ],
