@@ -1,7 +1,8 @@
 # Quaternionic Logic: A G-Lattice Unifying Boolean and Fuzzy Frameworks
 
 **Author:** J. Arturo Ornelas Brand — arturoornelas62@gmail.com
-**Status:** Computational verification complete. Paper in preparation.
+**Paper DOI:** [10.5281/zenodo.19562014](https://doi.org/10.5281/zenodo.19562014) (v0.1.1, all versions: [10.5281/zenodo.19560986](https://doi.org/10.5281/zenodo.19560986))
+**Status:** Published on Zenodo.
 
 ## Result
 
@@ -39,8 +40,16 @@ scripts/
   bridge_exploration.py                Failed and successful bridge attempts
   context_bridge.py                    G-lattice: conjugation as context transformation
   verify_resolutions.py                Verification of domain, soundness, non-decoration
+  verify_completeness.py               Completeness reduction to G~ (Godel with involutive negation)
+  verify_embedding.py                  k-axis embeddings of 5 generative algebras
+research/
+  open_questions.md                    7 open questions (5 resolved, 2 deferred to P11.1)
+  OQ3_embedding.md                     Detailed analysis of the embedding question
+  bibliography.md                      Working bibliography (~35 refs)
+  actionable_next.md                   Follow-up items post-publication
 paper/
-  quaternionic_logic.tex               Paper (forthcoming)
+  quaternionic_logic.tex               Paper source
+  quaternionic_logic.pdf               Compiled paper (24 pp)
 ```
 
 ## Dependencies
@@ -65,21 +74,31 @@ python scripts/context_bridge.py
 
 # Verify resolved open problems (domain, soundness, non-decoration)
 python scripts/verify_resolutions.py
+
+# Verify completeness via reduction to G~
+python scripts/verify_completeness.py
+
+# Verify k-axis embeddings of generative algebras
+python scripts/verify_embedding.py
 ```
 
-## Companion work
+## Companion papers
 
-This project builds on:
+Three companion papers extend the framework developed here:
 
-- **P9:** [The Primitive Equation of Information](../primitive-equation-paper/) — provides the operator O = {0, 1, +, i, j, k}, the Four Kingdoms, and the 72 semantic primitives
-- **La Danza Cosmica de los Opuestos** (book, in preparation) — philosophical framework establishing the anchor/perspective system that this paper formalizes
+- **P11.1** — *Toward a Non-Commutative Residuated Lattice from Quaternion Multiplication*. DOI: [10.5281/zenodo.19561407](https://doi.org/10.5281/zenodo.19561407). Investigates whether the Hamilton product can serve as a genuinely non-commutative conjunction; proves a trilemma on the semantic domain V and on the full ball B^4.
+- **P12** — *Duality Synthesis in Quaternionic Logic: How Opposites Generate Truth*. DOI: [10.5281/zenodo.19561634](https://doi.org/10.5281/zenodo.19561634). Develops the synthesis operation on the prime algebra and shows that opposites generate new truth at higher algebraic layers.
+- **P13** — *Pre-Logical States and the Birth of Information*. DOI: [10.5281/zenodo.19561722](https://doi.org/10.5281/zenodo.19561722). Formalises pre-logical states (points where the truth axis is undefined) and proves that information emerges as the compound concept of the pre-logical/logical duality.
 
 ## Citation
 
 ```
 Ornelas Brand, J.A. (2026). Quaternionic Logic: A G-Lattice Unifying
-Boolean and Fuzzy Frameworks. In preparation.
+Boolean and Fuzzy Frameworks (v0.1.1). Zenodo.
+https://doi.org/10.5281/zenodo.19562014
 ```
+
+Concept DOI (all versions): [10.5281/zenodo.19560986](https://doi.org/10.5281/zenodo.19560986)
 
 ## License
 

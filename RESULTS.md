@@ -1,7 +1,7 @@
 # Quaternionic Logic: Computational Results and Theoretical Findings
 
 **Date:** 2026-04-09
-**Status:** Computational verification complete. Paper pending.
+**Status:** Paper published on Zenodo v0.1.1 ([DOI 10.5281/zenodo.19562014](https://doi.org/10.5281/zenodo.19562014)).
 
 ---
 
